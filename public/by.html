@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlowPro — Маленькое агентство. Скорость большой команды.</title>
+  <meta name="description" content="Автоматизируем обработку заявок, follow-up и повторяющиеся процессы для агентств недвижимости 5–15 человек. Без найма разработчика. Без дорогой интеграционной фирмы." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    /* ─── Tokens ─────────────────────────────────────────── */
+    :root {
+      --blue:        #2563EB;
+      --blue-h:      #1D4ED8;
+      --blue-light:  #3B82F6;
+      --blue-bg:     #EFF6FF;
+      --blue-border: #BFDBFE;
+      --navy:        #0B1120;
+      --navy-2:      #0F172A;
+      --dark:        #1E293B;
+      --body:        #334155;
+      --muted:       #64748B;
+      --subtle:      #94A3B8;
+      --bg:          #FFFFFF;
+      --bg-alt:      #F8FAFC;
+      --border:      #E2E8F0;
+      --green:       #059669;
+      --green-bg:    #ECFDF5;
+      --green-text:  #065F46;
+      --red-bg:      #FEF2F2;
+      --red-text:    #991B1B;
+      --radius-sm:   8px;
+      --radius-md:   12px;
+      --radius-lg:   16px;
+      --shadow-sm:   0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.04);
+      --shadow-md:   0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.05);
+    }
+
+    /* ─── Base ───────────────────────────────────────────── */
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      color: var(--body);
+      background: var(--bg);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+
+    /* ─── Layout ─────────────────────────────────────────── */
+    .container   { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .section     { padding: 96px 0; }
+    .section-alt { background: var(--bg-alt); }
+
+    /* ─── Type helpers ───────────────────────────────────── */
+    .label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+    h2.headline {
+      font-size: clamp(30px, 3.5vw, 44px);
+      font-weight: 800;
+      letter-spacing: -.025em;
+      line-height: 1.15;
+      color: var(--navy-2);
+      margin-bottom: 18px;
+    }
+    .lead {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+
+    /* ─── Buttons ────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: inherit; font-weight: 600; text-decoration: none;
+      border: none; cursor: pointer; transition: background .18s, transform .12s;
+    }
+    .btn-primary {
+      background: var(--blue); color: #fff;
+      padding: 15px 30px; border-radius: var(--radius-sm); font-size: 15px;
+    }
+    .btn-primary:hover { background: var(--blue-h); transform: translateY(-1px); }
+    .btn-primary-lg {
+      padding: 18px 40px; font-size: 17px; border-radius: 10px;
+    }
+    .btn-ghost {
+      color: var(--subtle); font-size: 14px; font-weight: 500;
+      text-decoration: none;
+    }
+    .btn-ghost:hover { color: #fff; }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 200;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+    }
+    .logo {
+      font-size: 21px; font-weight: 900; letter-spacing: -.03em;
+      color: var(--navy-2); text-decoration: none;
+    }
+    .logo em { font-style: normal; color: var(--blue); }
+    .nav-links {
+      display: flex; align-items: center; gap: 32px; list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px; font-weight: 500; color: var(--muted);
+      text-decoration: none; transition: color .15s;
+    }
+    .nav-links a:hover { color: var(--dark); }
+    .nav-cta {
+      background: var(--blue); color: #fff;
+      padding: 10px 20px; border-radius: var(--radius-sm);
+      font-size: 14px; font-weight: 600; text-decoration: none;
+      transition: background .18s;
+    }
+    .nav-cta:hover { background: var(--blue-h); }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      background: var(--navy);
+      padding: 104px 0 96px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -160px; right: -120px;
+      width: 640px; height: 640px;
+      background: radial-gradient(circle, rgba(37,99,235,.18) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -200px; left: 40%;
+      width: 480px; height: 480px;
+      background: radial-gradient(circle, rgba(59,130,246,.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(37,99,235,.14);
+      border: 1px solid rgba(59,130,246,.25);
+      color: #93C5FD;
+      padding: 6px 16px; border-radius: 100px;
+      font-size: 13px; font-weight: 500;
+      margin-bottom: 32px;
+    }
+    .hero-pill svg { opacity: .7; }
+    .hero h1 {
+      font-size: clamp(44px, 5.5vw, 68px);
+      font-weight: 900;
+      letter-spacing: -.035em;
+      line-height: 1.05;
+      color: #fff;
+      max-width: 780px;
+      margin-bottom: 26px;
+    }
+    .hero h1 .accent { color: #60A5FA; }
+    .hero-sub {
+      font-size: 19px;
+      color: #94A3B8;
+      line-height: 1.7;
+      max-width: 560px;
+      margin-bottom: 44px;
+    }
+    .hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+    .hero-divider {
+      margin-top: 64px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(255,255,255,.07);
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+      gap: 0;
+      width: fit-content;
+    }
+    .hero-stat {
+      padding-right: 48px;
+      border-right: 1px solid rgba(255,255,255,.08);
+      margin-right: 48px;
+    }
+    .hero-stat:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+    .hero-stat strong {
+      display: block; font-size: 30px; font-weight: 800;
+      color: #fff; letter-spacing: -.025em; line-height: 1.1;
+    }
+    .hero-stat span { font-size: 13px; color: #475569; margin-top: 3px; display: block; }
+
+    /* ─── PAIN ───────────────────────────────────────────── */
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 52px;
+    }
+    .pain-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+      position: relative; overflow: hidden;
+    }
+    .pain-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 100%);
+    }
+    .pain-emoji { font-size: 28px; margin-bottom: 14px; }
+    .pain-card h3 { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+    .pain-card p  { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    /* ─── OFFER ──────────────────────────────────────────── */
+    .offer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .offer-text p { font-size: 16px; color: var(--body); line-height: 1.75; margin-bottom: 18px; }
+    .offer-note {
+      background: var(--blue-bg);
+      border: 1px solid var(--blue-border);
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      font-size: 14px;
+      color: var(--dark);
+      line-height: 1.65;
+      margin-top: 8px;
+    }
+    .flow-box {
+      background: var(--navy);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      color: #fff;
+    }
+    .flow-box h3 { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 28px; }
+    .flow-row {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .flow-row:last-child { border-bottom: none; }
+    .flow-num {
+      width: 28px; height: 28px; flex-shrink: 0;
+      background: var(--blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: #fff;
+    }
+    .flow-label { font-size: 14px; color: #94A3B8; line-height: 1.6; padding-top: 3px; }
+    .flow-label strong { color: #fff; display: block; margin-bottom: 2px; }
+
+    /* ─── STARTER PACKAGE ────────────────────────────────── */
+    .pkg-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 48px;
+      align-items: start;
+    }
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .check-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 15px; color: var(--body); line-height: 1.55;
+    }
+    .check-ico {
+      width: 22px; height: 22px; flex-shrink: 0;
+      background: var(--green-bg);
+      color: var(--green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 700; margin-top: 1px;
+    }
+    .boundary {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .b-section { }
+    .b-label {
+      font-size: 12px; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .b-label.inc { color: var(--green); }
+    .b-label.exc { color: #DC2626; }
+    .b-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .b-tag {
+      font-size: 13px; font-weight: 500; padding: 5px 12px;
+      border-radius: 100px;
+    }
+    .b-tag.inc { background: var(--green-bg); color: var(--green-text); }
+    .b-tag.exc { background: var(--red-bg);   color: var(--red-text); }
+
+    /* ─── PROCESS ────────────────────────────────────────── */
+    .process-list {
+      display: flex; flex-direction: column; gap: 0;
+      margin-top: 52px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: #fff;
+      box-shadow: var(--shadow-md);
+    }
+    .process-item {
+      display: flex; align-items: flex-start; gap: 24px;
+      padding: 28px 32px;
+      border-bottom: 1px solid var(--border);
+    }
+    .process-item:last-child { border-bottom: none; }
+    .p-num {
+      width: 36px; height: 36px; flex-shrink: 0;
+      background: var(--blue-bg);
+      color: var(--blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 800;
+    }
+    .p-body { flex: 1; }
+    .p-body h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+    .p-body p  { font-size: 15px; color: var(--muted); line-height: 1.65; }
+    .p-tag {
+      display: inline-block;
+      background: var(--blue-bg);
+      color: var(--blue);
+      font-size: 13px; font-weight: 600;
+      padding: 4px 12px; border-radius: 100px;
+      margin-top: 10px;
+    }
+    .p-tag.free {
+      background: var(--green-bg); color: var(--green-text);
+    }
+
+    /* ─── USE CASES ──────────────────────────────────────── */
+    .uc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .uc-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px 22px;
+      box-shadow: var(--shadow-sm);
+    }
+    .uc-icon { font-size: 26px; margin-bottom: 14px; }
+    .uc-card h3 { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 14px; }
+    .uc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .uc-list li {
+      font-size: 13px; color: var(--muted); line-height: 1.55;
+      padding-left: 14px; position: relative;
+    }
+    .uc-list li::before {
+      content: '·'; position: absolute; left: 0;
+      color: var(--blue-light); font-weight: 700;
+    }
+
+    /* ─── TRUST ──────────────────────────────────────────── */
+    .trust-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .trust-text p { font-size: 16px; color: var(--body); line-height: 1.75; margin-bottom: 32px; }
+    .trust-points { display: flex; flex-direction: column; gap: 20px; }
+    .t-point { display: flex; gap: 16px; align-items: flex-start; }
+    .t-icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+    .t-text { font-size: 15px; color: var(--body); line-height: 1.65; }
+    .founder-card {
+      background: var(--navy);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      text-align: center;
+    }
+    .f-avatar {
+      width: 64px; height: 64px;
+      background: var(--blue);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; font-weight: 800; color: #fff;
+      margin: 0 auto 16px;
+    }
+    .f-name { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+    .f-role { font-size: 13px; color: #475569; margin-bottom: 24px; line-height: 1.5; }
+    .f-quote {
+      font-size: 15px; color: #94A3B8;
+      line-height: 1.75;
+      font-style: italic;
+      border-top: 1px solid rgba(255,255,255,.07);
+      padding-top: 24px;
+    }
+
+    /* ─── PRICING ────────────────────────────────────────── */
+    .pricing-wrap { max-width: 780px; margin: 0 auto; text-align: center; }
+    .pricing-head { margin-bottom: 48px; }
+    .pricing-head .lead { margin: 0 auto; }
+    .pricing-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      text-align: left;
+    }
+    .p-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .p-card.dark {
+      background: var(--navy);
+      border-color: transparent;
+    }
+    .p-card-label {
+      font-size: 12px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--blue);
+      margin-bottom: 16px;
+    }
+    .p-card.dark .p-card-label { color: #60A5FA; }
+    .p-amount {
+      font-size: 42px; font-weight: 900;
+      color: var(--navy-2); letter-spacing: -.03em;
+      line-height: 1; margin-bottom: 6px;
+    }
+    .p-card.dark .p-amount { color: #fff; }
+    .p-period {
+      font-size: 13px; color: var(--muted); margin-bottom: 20px;
+    }
+    .p-card.dark .p-period { color: #475569; }
+    .p-detail {
+      font-size: 14px; color: var(--muted); line-height: 1.7;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+    .p-card.dark .p-detail { color: #64748B; border-color: rgba(255,255,255,.07); }
+    .pricing-footnote {
+      margin-top: 28px;
+      font-size: 14px; color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ─── FINAL CTA ──────────────────────────────────────── */
+    .cta-section {
+      background: var(--navy);
+      padding: 96px 0;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 900; color: #fff;
+      letter-spacing: -.03em; margin-bottom: 16px;
+    }
+    .cta-section p {
+      font-size: 18px; color: #94A3B8;
+      max-width: 520px; margin: 0 auto 40px; line-height: 1.7;
+    }
+    .cta-note {
+      margin-top: 24px;
+      font-size: 14px; color: #475569;
+    }
+    .cta-note a {
+      color: #60A5FA; text-decoration: none;
+    }
+    .cta-note a:hover { text-decoration: underline; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: var(--navy-2);
+      padding: 40px 0 32px;
+      border-top: 1px solid rgba(255,255,255,.05);
+    }
+    .footer-top {
+      display: flex; align-items: center; justify-content: space-between;
+      padding-bottom: 28px;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+      margin-bottom: 24px;
+    }
+    .f-logo {
+      font-size: 19px; font-weight: 900; letter-spacing: -.03em;
+      color: #fff; text-decoration: none;
+    }
+    .f-logo em { font-style: normal; color: var(--blue-light); }
+    .f-nav { display: flex; gap: 28px; }
+    .f-nav a {
+      font-size: 14px; color: #475569; text-decoration: none;
+      transition: color .15s;
+    }
+    .f-nav a:hover { color: #94A3B8; }
+    .footer-bottom {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-copy { font-size: 13px; color: #334155; }
+    .footer-email a { font-size: 13px; color: #334155; text-decoration: none; }
+    .footer-email a:hover { color: #64748B; }
+
+    /* ─── Responsive ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .pain-grid  { grid-template-columns: 1fr 1fr; }
+      .offer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .pkg-grid   { grid-template-columns: 1fr; }
+      .uc-grid    { grid-template-columns: 1fr 1fr; }
+      .trust-grid { grid-template-columns: 1fr; gap: 40px; }
+      .pricing-cards { grid-template-columns: 1fr; }
+      .nav-links  { display: none; }
+      .hero-divider { grid-template-columns: 1fr 1fr; gap: 24px; width: auto; }
+      .hero-stat  { border-right: none !important; padding-right: 0; margin-right: 0; }
+      .footer-top { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+    }
+    @media (max-width: 560px) {
+      .pain-grid { grid-template-columns: 1fr; }
+      .uc-grid   { grid-template-columns: 1fr; }
+      .pricing-cards { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 40px; }
+      .hero-divider { grid-template-columns: 1fr 1fr; }
+      .container { padding: 0 18px; }
+      .process-item { padding: 22px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="logo">Flow<em>Pro</em></a>
+      <ul class="nav-links">
+        <li><a href="#problem">Проблема</a></li>
+        <li><a href="#paket">Стартовый пакет</a></li>
+        <li><a href="#process">Как работаем</a></li>
+        <li><a href="#ceny">Стоимость</a></li>
+      </ul>
+      <a href="https://calendar.app.google/kEQn3nXiMPs6yCx8A" target="_blank" rel="noopener" class="nav-cta">Записаться на аудит →</a>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════ HERO ══════════════════════════ -->
+<section class="hero">
+  <div class="container">
+
+    <div class="hero-pill">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+      Managed Automation Service · Агентства недвижимости
+    </div>
+
+    <h1>
+      Маленькое агентство.<br>
+      <span class="accent">Скорость большой</span> команды.
+    </h1>
+
+    <p class="hero-sub">
+      Автоматизируем обработку заявок, follow-up и повторяющиеся процессы
+      для агентств 5–15 человек — без найма разработчика и без дорогой интеграционной фирмы.
+    </p>
+
+    <div class="hero-actions">
+      <a href="https://calendar.app.google/kEQn3nXiMPs6yCx8A" target="_blank" rel="noopener" class="btn btn-primary btn-primary-lg">
+        Записаться на бесплатный аудит
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+      <a href="#process" class="btn btn-ghost">Как это работает →</a>
+    </div>
+
+    <div class="hero-divider">
+      <div class="hero-stat">
+        <strong>30–60 мин</strong>
+        <span>Бесплатный аудит</span>
+      </div>
+      <div class="hero-stat">
+        <strong>1 процесс</strong>
+        <span>Как точка старта</span>
+      </div>
+      <div class="hero-stat">
+        <strong>от 4 000 PLN</strong>
+        <span>Стартовое внедрение</span>
+      </div>
+      <div class="hero-stat">
+        <strong>от 2 000 PLN</strong>
+        <span>Ежемесячное сопровождение</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════ PAIN ══════════════════════════ -->
+<section class="section section-alt" id="problem">
+  <div class="container">
+    <span class="label">Проблема</span>
+    <h2 class="headline">Где небольшие агентства теряют скорость каждый день</h2>
+    <div class="pain-grid">
+
+      <div class="pain-card">
+        <div class="pain-emoji">📥</div>
+        <h3>Заявки из разных каналов</h3>
+        <p>Email, форма, телефон, портал — каждая из разного места. Легко что-то пропустить или обработать слишком поздно.</p>
+      </div>
+
+      <div class="pain-card">
+        <div class="pain-emoji">⏱</div>
+        <h3>Запоздалые ответы</h3>
+        <p>Агент на показе или с другим клиентом. Новая заявка ждёт часами без какой-либо информации.</p>
+      </div>
+
+      <div class="pain-card">
+        <div class="pain-emoji">💭</div>
+        <h3>Follow-up держится на памяти</h3>
+        <p>Нет структуры — часть клиентов уходит без следующего шага. Нет системы — есть только надежда.</p>
+      </div>
+
+      <div class="pain-card">
+        <div class="pain-emoji">👁</div>
+        <h3>Владелец не видит картину</h3>
+        <p>Кто ждёт ответа? Где нет следующего шага? Без системы — ответить на это в любой момент сложно.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════ OFFER ═════════════════════════ -->
+<section class="section" id="oferta">
+  <div class="container">
+    <div class="offer-grid">
+
+      <div class="offer-text">
+        <span class="label">Что мы делаем</span>
+        <h2 class="headline">Не очередная CRM. Автоматизация вокруг вашего процесса.</h2>
+        <p>FlowPro не продаёт готовый инструмент, который нужно самому запустить и освоить. Мы разбираем один конкретный процесс в вашем агентстве, проектируем workflow под вашу специфику, внедряем его и поддерживаем как managed service.</p>
+        <p>Начинаем с малого — показываем результат — и только потом расширяемся на другие области: объявления, контент, отчёты, интеграции.</p>
+        <div class="offer-note">
+          <strong>Чем FlowPro не является:</strong> мы не продаём хостинг или установку инструментов. Мы продаём результат — работающий, управляемый бизнес-процесс, за который несём ответственность после запуска.
+        </div>
+      </div>
+
+      <div class="flow-box">
+        <h3>Как выглядит типичный первый проект</h3>
+
+        <div class="flow-row">
+          <div class="flow-num">1</div>
+          <div class="flow-label">
+            <strong>Новая заявка поступает</strong>
+            из формы, email или другого согласованного источника — в течение секунд
+          </div>
+        </div>
+        <div class="flow-row">
+          <div class="flow-num">2</div>
+          <div class="flow-label">
+            <strong>Нужный агент получает уведомление</strong>
+            без ручного переписывания и поиска кто должен ответить
+          </div>
+        </div>
+        <div class="flow-row">
+          <div class="flow-num">3</div>
+          <div class="flow-label">
+            <strong>Клиент получает подтверждение</strong>
+            автоматическое или подготовленное для подтверждения агентом
+          </div>
+        </div>
+        <div class="flow-row">
+          <div class="flow-num">4</div>
+          <div class="flow-label">
+            <strong>Follow-up появляется в нужный момент</strong>
+            без «ах, забыл» и без опоры на заметку в телефоне
+          </div>
+        </div>
+        <div class="flow-row">
+          <div class="flow-num">5</div>
+          <div class="flow-label">
+            <strong>Владелец видит актуальную картину</strong>
+            кто ждёт, где нет ответа, что без следующего шага
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════ STARTER PACKAGE ══════════════════ -->
+<section class="section section-alt" id="paket">
+  <div class="container">
+    <span class="label">Первый пакет</span>
+    <h2 class="headline" style="max-width:640px;">Lead Response &amp; Follow-up Starter</h2>
+    <p class="lead">Делаем так, чтобы каждая новая заявка была зафиксирована, назначена, обработана и имела следующий шаг.</p>
+
+    <div class="pkg-grid">
+
+      <div>
+        <ul class="check-list">
+          <li>
+            <span class="check-ico">✓</span>
+            Сбор заявок из до 2 согласованных, интегрируемых источников
+          </li>
+          <li>
+            <span class="check-ico">✓</span>
+            Уведомление и назначение нужного агента
+          </li>
+          <li>
+            <span class="check-ico">✓</span>
+            Автоматические нейтральные подтверждения для клиентов
+          </li>
+          <li>
+            <span class="check-ico">✓</span>
+            Продающие сообщения, подготовленные для подтверждения агентом
+          </li>
+          <li>
+            <span class="check-ico">✓</span>
+            Напоминания о follow-up и следующих шагах
+          </li>
+          <li>
+            <span class="check-ico">✓</span>
+            Простой дашборд / сводка для владельца агентства
+          </li>
+          <li>
+            <span class="check-ico">✓</span>
+            Тесты и короткая стабилизация после запуска (~1 неделя)
+          </li>
+        </ul>
+      </div>
+
+      <div class="boundary">
+        <div class="b-section">
+          <div class="b-label inc">Ежемесячное сопровождение включает</div>
+          <div class="b-tags">
+            <span class="b-tag inc">Хостинг и инфраструктура</span>
+            <span class="b-tag inc">Мониторинг 24/7</span>
+            <span class="b-tag inc">Резервные копии</span>
+            <span class="b-tag inc">Исправление ошибок</span>
+            <span class="b-tag inc">Небольшие правки</span>
+            <span class="b-tag inc">Ежемесячный отчёт</span>
+          </div>
+        </div>
+        <div class="b-section" style="margin-top:22px;">
+          <div class="b-label exc">Не включает (отдельная оценка)</div>
+          <div class="b-tags">
+            <span class="b-tag exc">Новые крупные автоматизации</span>
+            <span class="b-tag exc">Сложные интеграции</span>
+            <span class="b-tag exc">Изменения бизнес-логики</span>
+            <span class="b-tag exc">Поддержка 24/7 с SLA</span>
+          </div>
+        </div>
+        <div style="margin-top:22px; padding-top:20px; border-top:1px solid var(--border);">
+          <p style="font-size:13px; color:var(--muted); line-height:1.6;">
+            <strong style="color:var(--dark);">Политика каналов:</strong> не берём обязательство по конкретным каналам до discovery. Starter включает до 2 стабильных, интегрируемых источников. Нестандартные порталы, WhatsApp API и скрапинг — отдельная оценка или отказ.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════ PROCESS ═══════════════════════ -->
+<section class="section" id="process">
+  <div class="container">
+    <span class="label">Как начинаем</span>
+    <h2 class="headline" style="max-width:600px;">Пять шагов — от разговора до работающего процесса</h2>
+
+    <div class="process-list">
+
+      <div class="process-item">
+        <div class="p-num">1</div>
+        <div class="p-body">
+          <h3>Бесплатный аудит, 30–60 минут</h3>
+          <p>Смотрим как выглядит ваш текущий процесс и где лучшая точка старта для автоматизации. Без обязательств — ноль затрат на этом этапе.</p>
+          <span class="p-tag free">Бесплатно</span>
+        </div>
+      </div>
+
+      <div class="process-item">
+        <div class="p-num">2</div>
+        <div class="p-body">
+          <h3>Scope одного процесса</h3>
+          <p>Фиксируем текущее состояние, целевое состояние, интеграции, критерии приёмки и границы работ. Всё в виде документа, который обе стороны согласуют до начала внедрения.</p>
+        </div>
+      </div>
+
+      <div class="process-item">
+        <div class="p-num">3</div>
+        <div class="p-body">
+          <h3>Стартовое внедрение</h3>
+          <p>Собираем, тестируем и запускаем автоматизацию. Setup fee покрывает всю подготовку: настройку доступов, реализацию, тесты и запуск.</p>
+          <span class="p-tag">От 4 000 PLN</span>
+        </div>
+      </div>
+
+      <div class="process-item">
+        <div class="p-num">4</div>
+        <div class="p-body">
+          <h3>Стабилизация после старта</h3>
+          <p>В течение примерно недели после запуска подкручиваем детали — тексты, тайминг, назначения, правила. Чтобы workflow работал именно так, как должен в реальном использовании.</p>
+        </div>
+      </div>
+
+      <div class="process-item">
+        <div class="p-num">5</div>
+        <div class="p-body">
+          <h3>Ежемесячное управляемое сопровождение</h3>
+          <p>Только после запуска и стабилизации стартует подписка. Workflow работает на управляемой инфраструктуре — с мониторингом, поддержкой, исправлениями и ежемесячным отчётом.</p>
+          <span class="p-tag">От 2 000 PLN / месяц</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════ USE CASES ══════════════════════ -->
+<section class="section section-alt" id="vozmozhnosti">
+  <div class="container">
+    <span class="label">Что можно автоматизировать</span>
+    <h2 class="headline" style="max-width:600px;">Начинаем с заявок. Расширяемся, когда это имеет смысл.</h2>
+    <p class="lead">Каждая новая автоматизация за пределами starter package оценивается и выполняется отдельно — здесь нет пакета «всё включено».</p>
+
+    <div class="uc-grid">
+
+      <div class="uc-card">
+        <div class="uc-icon">📩</div>
+        <h3>Заявки и коммуникация</h3>
+        <ul class="uc-list">
+          <li>Быстрый ответ на новые заявки</li>
+          <li>Квалификация и назначение нужному агенту</li>
+          <li>Follow-up и напоминания о следующих шагах</li>
+          <li>Контроль забытых клиентов</li>
+          <li>Реактивация старых неотвеченных заявок</li>
+        </ul>
+      </div>
+
+      <div class="uc-card">
+        <div class="uc-icon">🏘</div>
+        <h3>Объявления и операции</h3>
+        <ul class="uc-list">
+          <li>Публикация и обновление объявлений</li>
+          <li>Генерация описаний объектов</li>
+          <li>Подбор новых предложений под запросы клиентов</li>
+          <li>Чеклисты фото и документов</li>
+        </ul>
+      </div>
+
+      <div class="uc-card">
+        <div class="uc-icon">📣</div>
+        <h3>Маркетинг и контент</h3>
+        <ul class="uc-list">
+          <li>Посты из новых объявлений в соцсети</li>
+          <li>Описания в разных вариантах и языках</li>
+          <li>Простой контент-план для агентов</li>
+        </ul>
+      </div>
+
+      <div class="uc-card">
+        <div class="uc-icon">🔗</div>
+        <h3>Интеграции и инструменты</h3>
+        <ul class="uc-list">
+          <li>Формы, email, таблицы, CRM, API</li>
+          <li>Простые контрольные панели для владельца</li>
+          <li>Нестандартные инструменты — отдельный scope</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════ TRUST / ABOUT ════════════════════ -->
+<section class="section" id="o-nas">
+  <div class="container">
+    <div class="trust-grid">
+
+      <div class="trust-text">
+        <span class="label">Кто стоит за FlowPro</span>
+        <h2 class="headline">Без интеграционных фирм и без передачи проекта между&nbsp;командами</h2>
+        <p>В FlowPro вы работаете напрямую с человеком, который проектирует, строит и поддерживает автоматизацию. Без account-менеджеров, без handoff'ов, без «это зона ответственности другой команды».</p>
+
+        <div class="trust-points">
+          <div class="t-point">
+            <div class="t-icon">🎯</div>
+            <div class="t-text">Начинаем с одного процесса. Показываем ценность — и только потом расширяем scope.</div>
+          </div>
+          <div class="t-point">
+            <div class="t-icon">📋</div>
+            <div class="t-text">Подписка стартует только после запуска и стабилизации. Вы не платите за то, что ещё не работает.</div>
+          </div>
+          <div class="t-point">
+            <div class="t-icon">🔒</div>
+            <div class="t-text">Ваши бизнес-данные — ваши. Экспорт доступен. Условия offboarding'а фиксируем в каждом договоре.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="founder-card">
+        <div class="f-avatar">I</div>
+        <div class="f-name">Иван</div>
+        <div class="f-role">Founder &amp; Senior Automation Engineer · FlowPro</div>
+        <div class="f-quote">
+          «Я работаю напрямую с каждым клиентом. Знаю ваш процесс, строю автоматизацию и поддерживаю её после запуска. Здесь нет посредников — один контакт и полная ответственность за результат.»
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════ PRICING ══════════════════════ -->
+<section class="section section-alt" id="ceny">
+  <div class="container">
+    <div class="pricing-wrap">
+
+      <div class="pricing-head">
+        <span class="label">Стоимость</span>
+        <h2 class="headline">Прозрачная цена,<br>конкретный scope</h2>
+        <p class="lead">Каждый проект оценивается после короткого разбора процесса. Ниже — точка старта.</p>
+      </div>
+
+      <div class="pricing-cards">
+        <div class="p-card">
+          <div class="p-card-label">Стартовое внедрение</div>
+          <div class="p-amount">4 000 PLN</div>
+          <div class="p-period">единоразово · от этой суммы</div>
+          <div class="p-detail">Включает анализ процесса, настройку доступов, реализацию, тесты, запуск и стабилизацию. Сложные интеграции или расширенный scope — отдельная оценка после аудита.</div>
+        </div>
+        <div class="p-card dark">
+          <div class="p-card-label">Ежемесячное сопровождение</div>
+          <div class="p-amount">2 000 PLN</div>
+          <div class="p-period">в месяц · после запуска · от этой суммы</div>
+          <div class="p-detail">Хостинг, мониторинг, резервные копии, исправление ошибок, небольшие правки и ежемесячный отчёт. Новые автоматизации и сложные интеграции оцениваются отдельно.</div>
+        </div>
+      </div>
+
+      <div class="pricing-footnote">
+        Риск снижаем через процесс — бесплатный аудит, чёткий scope, внедрение, стабилизация
+        и подписка только когда workflow работает. Не через снижение цены.
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════ FINAL CTA ═════════════════════ -->
+<section class="cta-section" id="kontakt">
+  <div class="container">
+    <h2>Хотите разобрать один процесс в вашем агентстве?</h2>
+    <p>Запишитесь на бесплатный 30-минутный аудит. Посмотрим, есть ли процесс, который можно быстро упорядочить и автоматизировать.</p>
+    <a href="https://calendar.app.google/kEQn3nXiMPs6yCx8A" target="_blank" rel="noopener" class="btn btn-primary btn-primary-lg">
+      Записаться на бесплатный аудит
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+    </a>
+    <div class="cta-note">
+      или напишите напрямую:
+      <a href="mailto:hello@flowpro.dev">hello@flowpro.dev</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════ FOOTER ═══════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <a href="/" class="f-logo">Flow<em>Pro</em></a>
+      <nav class="f-nav">
+        <a href="#oferta">Услуга</a>
+        <a href="#paket">Стартовый пакет</a>
+        <a href="#process">Как работаем</a>
+        <a href="#ceny">Стоимость</a>
+        <a href="mailto:hello@flowpro.dev">hello@flowpro.dev</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 FlowPro · flowpro.by</span>
+      <span class="footer-email"><a href="mailto:hello@flowpro.dev">hello@flowpro.dev</a></span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
