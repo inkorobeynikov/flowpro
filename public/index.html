@@ -519,6 +519,66 @@
       margin-bottom: 0;
       line-height: 1.6;
     }
+    
+    /* ─── SCENARIO TIMELINE ──────────────────────────────────── */
+    .scenario-wrap { margin-top: 48px; }
+    .scenario-timeline {
+      margin: 0 0 32px;
+      position: relative;
+    }
+    .scenario-timeline::before {
+      content: '';
+      position: absolute;
+      left: 72px; top: 8px; bottom: 8px;
+      width: 2px;
+      background: var(--border);
+    }
+    .sc-step {
+      display: grid;
+      grid-template-columns: 64px 24px 1fr;
+      gap: 0 16px;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+    .sc-time {
+      font-size: 11.5px; font-weight: 700; color: var(--muted);
+      text-align: right; padding-top: 3px; letter-spacing: .04em;
+      white-space: nowrap;
+    }
+    .sc-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--border); border: 2px solid var(--bg-alt);
+      margin-top: 4px; position: relative; z-index: 1; flex-shrink: 0;
+    }
+    .sc-dot.blue { background: var(--blue); border-color: var(--bg-alt); }
+    .sc-content strong {
+      font-size: 14.5px; font-weight: 700; color: var(--dark);
+      display: block; margin-bottom: 4px;
+    }
+    .sc-content p { font-size: 13.5px; color: var(--muted); line-height: 1.6; margin: 0; }
+    .scenario-note {
+      background: var(--blue-bg); border: 1px solid var(--blue-border);
+      border-radius: var(--radius-md); padding: 14px 18px;
+      font-size: 13.5px; color: #1D4ED8; font-weight: 500; line-height: 1.6;
+    }
+
+    /* ─── AI CALLOUT ─────────────────────────────────────────── */
+    .ai-callout {
+      margin-top: 48px;
+      padding: 24px 28px;
+      background: var(--navy-2);
+      border-radius: var(--radius-lg);
+      display: flex; gap: 18px; align-items: flex-start;
+    }
+    .ai-callout-icon {
+      font-size: 18px; color: var(--blue-light);
+      flex-shrink: 0; margin-top: 1px; line-height: 1;
+    }
+    .ai-callout-body strong {
+      font-size: 14.5px; font-weight: 700; color: #fff;
+      display: block; margin-bottom: 8px;
+    }
+    .ai-callout-body p { font-size: 13.5px; color: #94A3B8; line-height: 1.7; margin: 0; }
       </style>
 </head>
 <body>
@@ -766,6 +826,72 @@
 </section>
 
 
+
+
+<!-- ══════════════════════════ USE CASE ═══════════════════════ -->
+<section class="section" id="przyklad">
+  <div class="container">
+    <span class="label">Przykład z życia</span>
+    <h2 class="headline" style="max-width:560px;">Lead, który nie zginął w tłoku</h2>
+    <p class="lead" style="max-width:600px;">Zapytanie o mieszkanie wpada o 23:14. Żaden agent nie siedzi przy komputerze. Oto co dzieje się dalej — bez ręcznej pracy.</p>
+
+    <div class="scenario-wrap">
+      <div class="scenario-timeline">
+
+        <div class="sc-step">
+          <div class="sc-time">23:14</div>
+          <div class="sc-dot"></div>
+          <div class="sc-content">
+            <strong>Zapytanie z Otodom</strong>
+            <p>Klient wypełnia formularz kontaktowy: interesuje go 3-pokojowe w Mokotowie, gotowy na zakup w ciągu 2 miesięcy.</p>
+          </div>
+        </div>
+
+        <div class="sc-step">
+          <div class="sc-time">~10s</div>
+          <div class="sc-dot blue"></div>
+          <div class="sc-content">
+            <strong>Workflow odbiera i rejestruje</strong>
+            <p>Lead trafia do arkusza lub CRM, workflow przypisuje go do agenta odpowiedzialnego za Mokotów.</p>
+          </div>
+        </div>
+
+        <div class="sc-step">
+          <div class="sc-time">~20s</div>
+          <div class="sc-dot blue"></div>
+          <div class="sc-content">
+            <strong>Klient dostaje potwierdzenie</strong>
+            <p>Automatyczna wiadomość: "Odebraliśmy Twoje zapytanie — oddzwonimy jutro rano." Klient wie, że nie pisał w pustkę.</p>
+          </div>
+        </div>
+
+        <div class="sc-step">
+          <div class="sc-time">~25s</div>
+          <div class="sc-dot blue"></div>
+          <div class="sc-content">
+            <strong>Agent dostaje powiadomienie</strong>
+            <p>Push na telefon z kontekstem: imię klienta, obiekt zainteresowania, treść zapytania, źródło. Rano wie od czego zacząć.</p>
+          </div>
+        </div>
+
+        <div class="sc-step">
+          <div class="sc-time">Dzień 3</div>
+          <div class="sc-dot"></div>
+          <div class="sc-content">
+            <strong>Brak kontaktu? Workflow przypomina</strong>
+            <p>Jeśli agent nie odnotował żadnego kontaktu — dostaje przypomnienie. Lead nie ginie przez przeoczenie.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="scenario-note">
+        Właściciel widzi w jednym miejscu: kto czeka na odpowiedź, u kogo jest zaplanowany następny krok, kto wypadł z procesu.
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ═══════════════════════════ PROCESS ═══════════════════════ -->
 <section class="section" id="proces">
   <div class="container">
@@ -874,6 +1000,14 @@
         </ul>
       </div>
 
+    </div>
+
+    <div class="ai-callout">
+      <div class="ai-callout-icon">✦</div>
+      <div class="ai-callout-body">
+        <strong>AI tam, gdzie realnie przyspiesza</strong>
+        <p>Część workflow zyskuje na integracji modeli językowych: wstępna klasyfikacja zapytań według pilności i typu, generowanie opisów nieruchomości z danych obiektu, podsumowania notatek ze spotkań lub rozmów. Wdrażamy AI tam, gdzie skraca czas lub podnosi jakość — nie dlatego, że brzmi nowocześnie.</p>
+      </div>
     </div>
   </div>
 </section>
