@@ -1,8 +1,9 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-const [html, sitemap, home] = await Promise.all([
+const [html, privacyHtml, sitemap, home] = await Promise.all([
   readFile(new URL("../public/ai-visibility/index.html", import.meta.url), "utf8"),
+  readFile(new URL("../public/ai-visibility/privacy/index.html", import.meta.url), "utf8"),
   readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8"),
   readFile(new URL("../public/index.html", import.meta.url), "utf8"),
 ]);
@@ -57,5 +58,19 @@ assert.match(html, /href="\/ai-visibility\/privacy\/"/, "privacy link is missing
 assert.match(home, /href="\/ai-visibility\/"/, "AI Visibility page is missing from site navigation");
 assert.match(sitemap, /<loc>https:\/\/flowpro\.dev\/ai-visibility\/<\/loc>/);
 assert.match(sitemap, /<loc>https:\/\/flowpro\.dev\/ai-visibility\/privacy\/<\/loc>/);
+
+assert.equal(
+  [...privacyHtml.matchAll(/<h1(?:\s[^>]*)?>/gi)].length,
+  1,
+  "privacy page must have exactly one H1",
+);
+assert.match(
+  privacyHtml,
+  /Ivan Karabeinikau Digital Engineering, a sole proprietorship registered in the Polish business register \(CEIDG\), operating as FlowPro, ul\. Bokserska 63, 02-690 Warszawa, Poland\. NIP: 9512646879\./,
+  "privacy page must contain the complete operator details",
+);
+assert.match(privacyHtml, /href="mailto:ivan@flowpro\.dev">ivan@flowpro\.dev<\/a>/);
+assert.doesNotMatch(privacyHtml, /\[(?:STREET AND NUMBER|POSTCODE|Operator|Contact)\]/i, "privacy page still contains placeholders");
+assert.doesNotMatch(privacyHtml, /<meta\s+name="robots"\s+content="[^"]*noindex/i, "privacy page must be indexable");
 
 console.log("AI Visibility checks passed");
