@@ -16,6 +16,104 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='2' y='4' width='28' height='5.5' rx='2.75' fill='%232563EB'/><rect x='2' y='13' width='21' height='5.5' rx='2.75' fill='%232563EB'/><rect x='2' y='22' width='14' height='5.5' rx='2.75' fill='%232563EB'/></svg>" />
   <meta name="description" content="Automatyzacja i AI dla agencji nieruchomości 5–15 osób. Każde wdrożenie budujemy od zera pod konkretne procesy biura — bez działu IT, bez dużej firmy wdrożeniowej." />
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://flowpro.dev/#organization",
+    "name": "FlowPro",
+    "url": "https://flowpro.dev/",
+    "description": "Automatyzacja i AI dla agencji nieruchomości 5–15 osób. Każde wdrożenie budujemy od zera pod konkretne procesy biura — bez działu IT, bez dużej firmy wdrożeniowej.",
+    "areaServed": "PL"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://flowpro.dev/#service",
+    "name": "Automatyzacja procesów i AI dla agencji nieruchomości",
+    "serviceType": "Automatyzacja procesów i AI dla agencji nieruchomości",
+    "provider": {
+      "@id": "https://flowpro.dev/#organization"
+    },
+    "areaServed": "PL",
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Agencje nieruchomości 5–15 osób"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Offer",
+    "name": "Wdrożenie startowe",
+    "url": "https://flowpro.dev/#cennik",
+    "priceCurrency": "PLN",
+    "price": "4000",
+    "description": "Wdrożenie startowe automatyzacji jednego procesu"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Offer",
+    "name": "Miesięczna obsługa zarządzana",
+    "url": "https://flowpro.dev/#cennik",
+    "priceCurrency": "PLN",
+    "price": "2000",
+    "description": "Miesięczna obsługa po uruchomieniu: hosting, monitoring, backup, poprawki błędów, drobne zmiany i raport stanu"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Czym różni się FlowPro od zwykłego CRM-u?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "FlowPro nie sprzedaje gotowego oprogramowania do samodzielnego wdrożenia. Projektujemy, uruchamiamy i utrzymujemy automatyzację dopasowaną do konkretnych procesów biura jako usługę zarządzaną."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Ile trwa wdrożenie pierwszego procesu?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Termin ustalamy po bezpłatnym audycie, ponieważ zależy od zakresu procesu i potrzebnych integracji. Po uruchomieniu przewidujemy zwykle około tygodnia na stabilizację i dopasowanie szczegółów."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Co obejmuje bezpłatny audyt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Podczas 30–60-minutowej rozmowy sprawdzamy obecny proces agencji i wskazujemy najlepszy punkt startowy dla automatyzacji. Audyt jest bezpłatny i nie wiąże się z żadnym zobowiązaniem."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Ile kosztuje pakiet startowy i obsługa miesięczna?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Wdrożenie startowe kosztuje od 4 000 zł netto jednorazowo. Miesięczna obsługa zarządzana kosztuje od 2 000 zł netto i rozpoczyna się dopiero po uruchomieniu oraz stabilizacji procesu."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Czy potrzebujemy własnego działu IT?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nie. FlowPro projektuje, wdraża i utrzymuje automatyzację, a klient pracuje bezpośrednio ze specjalistą odpowiedzialnym za rozwiązanie."
+        }
+      }
+    ]
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -442,6 +540,21 @@
       text-align: center; font-size: 14px; color: var(--muted);
     }
 
+    /* ─── FAQ ────────────────────────────────────────────── */
+    .faq-wrap { max-width: 860px; margin: 0 auto; }
+    .faq-head { margin-bottom: 44px; }
+    .faq-list { display: grid; gap: 14px; }
+    .faq-item {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 24px 26px;
+      box-shadow: var(--shadow-sm);
+    }
+    .faq-item h3 {
+      font-size: 17px; font-weight: 700; color: var(--navy-2);
+      line-height: 1.4; margin-bottom: 8px;
+    }
+    .faq-item p { font-size: 15px; color: var(--muted); line-height: 1.7; }
+
     /* ─── FINAL CTA ──────────────────────────────────────── */
     .cta-section {
       background: var(--navy);
@@ -613,8 +726,8 @@
     </h1>
 
     <p class="hero-sub">
-      Automatyzacja i AI dla agencji nieruchomości 5–15 osób.
-      Każde wdrożenie budujemy od zera pod konkretne procesy biura — bez działu IT, bez dużej firmy wdrożeniowej.
+      FlowPro to zarządzana usługa automatyzacji i AI dla agencji nieruchomości 5–15 osób.
+      Projektujemy, wdrażamy i utrzymujemy rozwiązania dopasowane do procesów biura — bez własnego działu IT i bez dużej firmy wdrożeniowej.
     </p>
 
     <div class="hero-actions">
@@ -1080,6 +1193,43 @@
         i subskrypcja dopiero gdy workflow działa. Nie przez obniżenie ceny.
       </div>
 
+    </div>
+  </div>
+</section>
+
+
+<!-- ═════════════════════════════ FAQ ═════════════════════════ -->
+<section class="section" id="faq">
+  <div class="container">
+    <div class="faq-wrap">
+      <div class="faq-head">
+        <span class="label">FAQ</span>
+        <h2 class="headline">Najczęstsze pytania</h2>
+        <p class="lead">Krótko o modelu współpracy, wdrożeniu i kosztach.</p>
+      </div>
+
+      <div class="faq-list">
+        <article class="faq-item">
+          <h3>Czym różni się FlowPro od zwykłego CRM-u?</h3>
+          <p>FlowPro nie sprzedaje gotowego oprogramowania do samodzielnego wdrożenia. Projektujemy, uruchamiamy i utrzymujemy automatyzację dopasowaną do konkretnych procesów biura jako usługę zarządzaną.</p>
+        </article>
+        <article class="faq-item">
+          <h3>Ile trwa wdrożenie pierwszego procesu?</h3>
+          <p>Termin ustalamy po bezpłatnym audycie, ponieważ zależy od zakresu procesu i potrzebnych integracji. Po uruchomieniu przewidujemy zwykle około tygodnia na stabilizację i dopasowanie szczegółów.</p>
+        </article>
+        <article class="faq-item">
+          <h3>Co obejmuje bezpłatny audyt?</h3>
+          <p>Podczas 30–60-minutowej rozmowy sprawdzamy obecny proces agencji i wskazujemy najlepszy punkt startowy dla automatyzacji. Audyt jest bezpłatny i nie wiąże się z żadnym zobowiązaniem.</p>
+        </article>
+        <article class="faq-item">
+          <h3>Ile kosztuje pakiet startowy i obsługa miesięczna?</h3>
+          <p>Wdrożenie startowe kosztuje od 4 000 zł netto jednorazowo. Miesięczna obsługa zarządzana kosztuje od 2 000 zł netto i rozpoczyna się dopiero po uruchomieniu oraz stabilizacji procesu.</p>
+        </article>
+        <article class="faq-item">
+          <h3>Czy potrzebujemy własnego działu IT?</h3>
+          <p>Nie. FlowPro projektuje, wdraża i utrzymuje automatyzację, a klient pracuje bezpośrednio ze specjalistą odpowiedzialnym za rozwiązanie.</p>
+        </article>
+      </div>
     </div>
   </div>
 </section>

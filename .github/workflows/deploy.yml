@@ -13,6 +13,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Validate AEO files and structured data
+        run: node tests/aeo.test.mjs
+
       - name: Copy files to server
         uses: appleboy/scp-action@v0.1.7
         with:

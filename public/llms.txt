@@ -1,0 +1,20 @@
+# FlowPro
+
+> Automatyzacja i AI dla małych agencji nieruchomości (5–15 osób).
+> Wdrożenia dopasowane do konkretnych procesów biura — bez własnego działu IT i bez dużej firmy wdrożeniowej.
+
+## Co robimy
+
+- Automatyzacja obsługi leadów: odpowiedzi, follow-up i dystrybucja zapytań
+- Automatyzacja ogłoszeń, marketingu i integracji narzędzi
+- Model współpracy: usługa zarządzana, nie sprzedaż oprogramowania
+
+## Cennik
+
+- Wdrożenie startowe jednego procesu: od 4 000 PLN netto
+- Miesięczna obsługa zarządzana: od 2 000 PLN netto / miesiąc
+
+## Kontakt
+
+- Strona: https://flowpro.dev/
+- Email: ivan@flowpro.dev
