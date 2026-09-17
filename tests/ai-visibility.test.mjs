@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-const [html, privacyHtml, sitemap, home] = await Promise.all([
+const [html, privacyHtml, welcomeHtml, goodbyeHtml, sitemap, home] = await Promise.all([
   readFile(new URL("../public/ai-visibility/index.html", import.meta.url), "utf8"),
   readFile(new URL("../public/ai-visibility/privacy/index.html", import.meta.url), "utf8"),
+  readFile(new URL("../public/ai-visibility/welcome/index.html", import.meta.url), "utf8"),
+  readFile(new URL("../public/ai-visibility/goodbye/index.html", import.meta.url), "utf8"),
   readFile(new URL("../public/sitemap.xml", import.meta.url), "utf8"),
   readFile(new URL("../public/index.html", import.meta.url), "utf8"),
 ]);
@@ -72,5 +74,30 @@ assert.match(
 assert.match(privacyHtml, /href="mailto:ivan@flowpro\.dev">ivan@flowpro\.dev<\/a>/);
 assert.doesNotMatch(privacyHtml, /\[(?:STREET AND NUMBER|POSTCODE|Operator|Contact)\]/i, "privacy page still contains placeholders");
 assert.doesNotMatch(privacyHtml, /<meta\s+name="robots"\s+content="[^"]*noindex/i, "privacy page must be indexable");
+
+for (const [page, pageHtml, heading] of [
+  ["welcome", welcomeHtml, "Installed. Here's how to run your first check"],
+  ["goodbye", goodbyeHtml, "Sorry to see you go"],
+]) {
+  assert.match(pageHtml, /<meta\s+name="robots"\s+content="noindex, nofollow"\s*\/?>/i, `${page} page must be noindex`);
+  assert.equal([...pageHtml.matchAll(/<h1(?:\s[^>]*)?>/gi)].length, 1, `${page} page must have exactly one H1`);
+  assert.ok(pageHtml.includes(heading), `${page} page is missing its heading`);
+}
+
+assert.match(welcomeHtml, /Open any website/);
+assert.match(welcomeHtml, /Click the icon in your toolbar/);
+assert.match(welcomeHtml, /Read “Fix first”/);
+assert.match(welcomeHtml, /Popup screenshot placeholder/);
+assert.match(welcomeHtml, /Nothing leaves your browser/);
+assert.match(welcomeHtml, /id="waitlist-form"/);
+assert.match(welcomeHtml, /href="\/ai-visibility\/privacy\/"/);
+
+assert.match(goodbyeHtml, /What was missing\?/);
+for (const response of ["Wrong results", "Not useful for my site", "Too technical", "Just testing", "Other"]) {
+  assert.ok(goodbyeHtml.includes(response), `goodbye page missing response: ${response}`);
+}
+assert.match(goodbyeHtml, /id="other-detail"/);
+assert.match(goodbyeHtml, /<button class="button" type="submit">Send<\/button>/);
+assert.match(goodbyeHtml, /Thank you for the feedback\./);
 
 console.log("AI Visibility checks passed");

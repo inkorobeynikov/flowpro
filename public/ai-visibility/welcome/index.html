@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to AI Visibility Checker | FlowPro</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href="https://flowpro.dev/ai-visibility/welcome/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --blue: #2563eb;
+        --blue-hover: #1d4ed8;
+        --blue-bg: #eff6ff;
+        --navy: #0b1120;
+        --navy-2: #0f172a;
+        --dark: #1e293b;
+        --body: #334155;
+        --muted: #64748b;
+        --border: #e2e8f0;
+        --bg-alt: #f8fafc;
+        --green: #059669;
+        --green-bg: #ecfdf5;
+      }
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--body);
+        background: var(--bg-alt);
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: inherit;
+      }
+      .container {
+        width: min(940px, calc(100% - 56px));
+        margin: 0 auto;
+      }
+      .nav {
+        border-bottom: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.92);
+      }
+      .nav-inner {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--navy-2);
+        font-size: 21px;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        text-decoration: none;
+      }
+      .logo em {
+        color: var(--blue);
+        font-style: normal;
+      }
+      .back-link {
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .back-link:hover {
+        color: var(--blue);
+      }
+      main {
+        padding: 72px 0 96px;
+      }
+      .guide {
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        background: #fff;
+        box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
+      }
+      .intro {
+        padding: 56px 60px 44px;
+        background: var(--navy);
+      }
+      .eyebrow {
+        display: block;
+        margin-bottom: 14px;
+        color: #93c5fd;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+      h1 {
+        max-width: 650px;
+        color: #fff;
+        font-size: clamp(36px, 5vw, 54px);
+        font-weight: 900;
+        line-height: 1.08;
+        letter-spacing: -0.035em;
+      }
+      .intro p {
+        max-width: 620px;
+        margin-top: 20px;
+        color: #a8b5c8;
+        font-size: 17px;
+      }
+      .content {
+        padding: 52px 60px 0;
+      }
+      h2 {
+        color: var(--navy-2);
+        font-size: 27px;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+      }
+      .steps {
+        display: grid;
+        gap: 18px;
+        margin-top: 28px;
+        list-style: none;
+        counter-reset: step;
+      }
+      .steps li {
+        display: grid;
+        grid-template-columns: 38px 1fr;
+        align-items: start;
+        gap: 14px;
+        color: var(--dark);
+        font-size: 16px;
+      }
+      .steps li::before {
+        content: counter(step);
+        counter-increment: step;
+        display: grid;
+        width: 30px;
+        height: 30px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--blue-bg);
+        color: var(--blue);
+        font-size: 14px;
+        font-weight: 800;
+      }
+      .steps strong {
+        color: var(--navy-2);
+      }
+      .popup-placeholder {
+        margin: 42px 0;
+        overflow: hidden;
+        border: 1px solid #dce3f0;
+        border-radius: 10px;
+        background: #fff;
+        box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+      }
+      .browser-bar {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 11px 14px;
+        border-bottom: 1px solid var(--border);
+        background: #f8fafc;
+      }
+      .browser-bar span {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #94a3b8;
+      }
+      .browser-url {
+        width: 58%;
+        height: 21px;
+        margin-left: 8px;
+        border-radius: 4px;
+        background: #e2e8f0;
+      }
+      .popup-stage {
+        min-height: 285px;
+        padding: 26px;
+        background: linear-gradient(135deg, #f8fafc 0%, #eef5ff 100%);
+      }
+      .popup {
+        width: min(100%, 340px);
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #dce3f0;
+        border-radius: 9px;
+        background: #fff;
+        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.14);
+      }
+      .popup-title {
+        color: var(--navy-2);
+        font-size: 14px;
+        font-weight: 800;
+      }
+      .popup-site {
+        margin-top: 4px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .popup-score {
+        display: flex;
+        align-items: baseline;
+        gap: 9px;
+        margin: 19px 0;
+      }
+      .popup-score strong {
+        color: var(--blue);
+        font-size: 42px;
+        line-height: 1;
+      }
+      .popup-score span {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .popup-fix {
+        padding: 11px;
+        border-radius: 6px;
+        background: var(--blue-bg);
+        color: #1e40af;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      .popup-caption {
+        padding: 11px 15px;
+        color: var(--muted);
+        font-size: 12px;
+        text-align: center;
+      }
+      .privacy-note {
+        display: flex;
+        gap: 12px;
+        margin: 0 -60px;
+        padding: 25px 60px;
+        background: var(--blue-bg);
+        color: var(--dark);
+        font-size: 15px;
+      }
+      .privacy-note strong {
+        color: var(--navy-2);
+      }
+      .tick {
+        flex: 0 0 auto;
+        display: grid;
+        width: 24px;
+        height: 24px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--green-bg);
+        color: var(--green);
+        font-size: 13px;
+        font-weight: 900;
+      }
+      .waitlist {
+        margin: 0 -60px;
+        padding: 50px 60px;
+        background: var(--navy);
+        text-align: center;
+      }
+      .waitlist h2 {
+        color: #fff;
+      }
+      .waitlist p {
+        max-width: 570px;
+        margin: 14px auto 0;
+        color: #94a3b8;
+        font-size: 16px;
+      }
+      .waitlist-form {
+        display: flex;
+        gap: 10px;
+        max-width: 560px;
+        margin: 28px auto 0;
+      }
+      .waitlist-form input {
+        flex: 1;
+        min-width: 0;
+        padding: 14px 16px;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        color: var(--navy-2);
+        outline: none;
+      }
+      .waitlist-form input:focus {
+        border-color: #60a5fa;
+        box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.18);
+      }
+      .button {
+        padding: 14px 22px;
+        border: 0;
+        border-radius: 8px;
+        background: var(--blue);
+        color: #fff;
+        font: inherit;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .button:hover {
+        background: var(--blue-hover);
+      }
+      .form-success {
+        display: none;
+        max-width: 560px;
+        margin: 28px auto 0;
+        padding: 16px;
+        border: 1px solid rgba(52, 211, 153, 0.25);
+        border-radius: 8px;
+        background: rgba(5, 150, 105, 0.12);
+        color: #a7f3d0;
+        font-weight: 600;
+      }
+      .form-success.visible {
+        display: block;
+      }
+      .form-note,
+      .privacy-link {
+        font-size: 12px !important;
+      }
+      .privacy-link a {
+        color: #bfdbfe;
+        text-underline-offset: 3px;
+      }
+      footer {
+        padding: 30px 0;
+        color: var(--muted);
+        font-size: 12px;
+        text-align: center;
+      }
+      @media (max-width: 680px) {
+        .container {
+          width: calc(100% - 36px);
+        }
+        main {
+          padding: 44px 0 64px;
+        }
+        .intro,
+        .content {
+          padding-right: 24px;
+          padding-left: 24px;
+        }
+        .privacy-note,
+        .waitlist {
+          margin-right: -24px;
+          margin-left: -24px;
+          padding-right: 24px;
+          padding-left: 24px;
+        }
+        .waitlist-form {
+          flex-direction: column;
+        }
+        .back-link {
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav" aria-label="Main navigation">
+      <div class="container nav-inner">
+        <a href="/" class="logo" aria-label="FlowPro home"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 28 20"
+            width="20"
+            height="14"
+            aria-hidden="true"
+          >
+            <rect width="28" height="5" rx="2.5" fill="#2563EB" />
+            <rect y="7.5" width="21" height="5" rx="2.5" fill="#2563EB" />
+            <rect y="15" width="14" height="5" rx="2.5" fill="#2563EB" /></svg
+          ><span>Flow<em>Pro</em></span></a
+        ><a class="back-link" href="/ai-visibility/">AI Visibility Checker</a>
+      </div>
+    </nav>
+    <main>
+      <div class="container">
+        <article class="guide">
+          <header class="intro">
+            <span class="eyebrow">AI Visibility Checker</span>
+            <h1>Installed. Here's how to run your first check</h1>
+            <p>
+              It takes a few seconds to see what AI assistants can read from any
+              page.
+            </p>
+          </header>
+          <div class="content">
+            <h2>Start your first check</h2>
+            <ol class="steps">
+              <li>
+                <span
+                  ><strong>Open any website</strong> you want to check.</span
+                >
+              </li>
+              <li>
+                <span
+                  ><strong>Click the icon in your toolbar.</strong> Pin it first
+                  from Chrome's puzzle menu so it is always easy to find.</span
+                >
+              </li>
+              <li>
+                <span
+                  ><strong>Read “Fix first”</strong> and copy the report when
+                  you are ready to share it.</span
+                >
+              </li>
+            </ol>
+            <div
+              class="popup-placeholder"
+              role="img"
+              aria-label="Placeholder showing the AI Visibility Checker popup"
+            >
+              <div class="browser-bar">
+                <span></span><span></span><span></span>
+                <div class="browser-url"></div>
+              </div>
+              <div class="popup-stage">
+                <div class="popup">
+                  <p class="popup-title">AI Visibility Checker</p>
+                  <p class="popup-site">example.com</p>
+                  <div class="popup-score">
+                    <strong>77</strong
+                    ><span>out of 100<br />Readable by AI</span>
+                  </div>
+                  <p class="popup-fix">
+                    Fix first: Add a clear meta description
+                  </p>
+                </div>
+              </div>
+              <p class="popup-caption">Popup screenshot placeholder</p>
+            </div>
+            <aside class="privacy-note">
+              <span class="tick">✓</span
+              ><span
+                ><strong>Nothing leaves your browser.</strong> The check and
+                report are built locally on your device.</span
+              >
+            </aside>
+            <section class="waitlist">
+              <h2>Get notified about the live check</h2>
+              <p>
+                Leave your email and we will send one update when the
+                browser-based checker is ready.
+              </p>
+              <form
+                class="waitlist-form"
+                id="waitlist-form"
+                action="GOOGLE_FORM_ACTION_URL"
+                method="post"
+                target="waitlist-submit-frame"
+              >
+                <label for="waitlist-email" hidden>Email address</label
+                ><input
+                  id="waitlist-email"
+                  name="entry.EMAIL_ENTRY_ID"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="you@company.com"
+                  required
+                /><button class="button" type="submit">Notify me</button>
+              </form>
+              <div
+                class="form-success"
+                id="form-success"
+                role="status"
+                tabindex="-1"
+              >
+                You're on the list. We'll let you know when the live check
+                launches.
+              </div>
+              <p class="form-note">Email only. No product newsletter.</p>
+              <p class="privacy-link">
+                <a href="/ai-visibility/privacy/"
+                  >Read the extension privacy policy</a
+                >
+              </p>
+              <iframe
+                name="waitlist-submit-frame"
+                title="Waitlist form submission"
+                hidden
+              ></iframe>
+            </section>
+          </div>
+        </article>
+      </div>
+    </main>
+    <footer>
+      <div class="container">
+        Ivan Karabeinikau Digital Engineering · NIP: 9512646879
+      </div>
+    </footer>
+    <script>
+      const waitlistForm = document.getElementById("waitlist-form");
+      const successMessage = document.getElementById("form-success");
+      waitlistForm.addEventListener("submit", () => {
+        window.setTimeout(() => {
+          waitlistForm.hidden = true;
+          successMessage.classList.add("visible");
+          successMessage.focus();
+        }, 500);
+      });
+    </script>
+  </body>
+</html>
