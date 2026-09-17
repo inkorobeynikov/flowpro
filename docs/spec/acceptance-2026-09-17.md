@@ -129,8 +129,7 @@ known. `tests/ai-visibility.test.mjs` fails the build if `2 900`, `€690` or
 
 | Item | State |
 |---|---|
-| `{{UMAMI_WEBSITE_ID}}` | literal placeholder on all 13 pages, as instructed |
-| Umami script URL | assumed `https://cloud.umami.is/script.js`; change if you self-host |
+| Umami | **done**: self-hosted at analytics.flowpro.dev, website id 2bc8b095-99f7-4343-a61c-1fcff09681de, on all 13 pages. Verified in a browser: script loads, `window.umami` present, pageview and a custom event POST to `/api/send`, no JS errors, no CSP violations, preflight from the flowpro.dev origin returns 204 |
 | `data-umami-event` names | `install-extension`, `view-fix-service`, `view-checker`, `request-fix`, `submit-fix-request`, `submit-waitlist`, `submit-uninstall-feedback`. Spec 7.1's names were not available — rename if they differ |
 | Form JSON contract | field names `url, email, platform, notes, src, score, ref, lang, page` (audit request) and `email, src, ref, lang, page` (waitlist). Spec 10.6 was not available; confirm against the API |
 | Uninstall feedback endpoint | `POST /v1/site/feedback` — **not in the contract you listed**. Invented so the placeholder could be removed; the mailto fallback makes the form work either way |

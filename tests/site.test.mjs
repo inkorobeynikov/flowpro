@@ -104,11 +104,22 @@ for (const { rel, html } of pages) {
   }
   assert.match(html, /<meta name="twitter:card" content="summary_large_image"/, where("missing twitter:card"));
 
-  // Cookieless analytics on every page, and nothing else.
-  assert.match(
-    html,
-    /<script defer src="https:\/\/cloud\.umami\.is\/script\.js" data-website-id="[^"]+"><\/script>/,
-    where("missing the Umami snippet"),
+  // Cookieless analytics on every page, exactly once, and nothing else.
+  // There is no template engine here, so the snippet lives in each file; this
+  // assertion is what keeps the thirteen copies from drifting apart.
+  const snippet =
+    '<script defer src="https://analytics.flowpro.dev/script.js" data-website-id="2bc8b095-99f7-4343-a61c-1fcff09681de"></script>';
+  assert.equal(
+    html.split(snippet).length - 1,
+    1,
+    where("the Umami snippet must appear exactly once, with this src and id"),
+  );
+  assert.doesNotMatch(html, /cloud\.umami\.is/, where("analytics is self-hosted now"));
+  assert.doesNotMatch(html, /UMAMI_WEBSITE_ID/, where("leftover analytics placeholder"));
+  const gapToHeadEnd = html.indexOf("</head>") - (html.indexOf(snippet) + snippet.length);
+  assert.ok(
+    gapToHeadEnd >= 0 && gapToHeadEnd <= 10,
+    where("the snippet belongs immediately before </head>"),
   );
   assert.doesNotMatch(html, /googletagmanager|google-analytics|gtag\(|fbq\(/i, where("no third-party tracking"));
   assert.doesNotMatch(html, /document\.cookie/, where("this site sets no cookies"));

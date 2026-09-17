@@ -31,13 +31,27 @@ this repo has always worked. Two stylesheets are in use: the marketing one (home
 fix, about, legacy) and the checker one (extension pages). Keep them in sync by
 copying rules, not by inventing new components.
 
-## Placeholders and external services
+## Analytics
 
-| Token | Where | Replace with |
-|---|---|---|
-| `{{UMAMI_WEBSITE_ID}}` | every page, in the analytics snippet | the Umami website id |
+Every page carries one line, immediately before `</head>`:
 
-Everything else is wired to a real endpoint:
+```html
+<script defer src="https://analytics.flowpro.dev/script.js" data-website-id="2bc8b095-99f7-4343-a61c-1fcff09681de"></script>
+```
+
+Umami is self-hosted, cookieless, and the only tracker on the site. There is no
+template engine here, so that line is repeated in each file; `tests/site.test.mjs`
+fails the build if any page carries a different src or id, a second copy, or a
+second analytics vendor. CTAs are tagged with `data-umami-event`:
+`install-extension`, `view-checker`, `view-fix-service`, `request-fix`,
+`submit-fix-request`, `submit-waitlist`, `submit-uninstall-feedback`.
+
+`by.html` is the flowpro.by landing and is deliberately left out, so its traffic
+does not land in the flowpro.dev property.
+
+## External services
+
+All wired to real endpoints:
 
 | Form | Endpoint | Fallback |
 |---|---|---|
