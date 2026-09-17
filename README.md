@@ -97,7 +97,16 @@ dropped, remove it on the server by hand.
 
 ## nginx
 
-`nginx/flowpro.conf` (and the older `nginx/flowpro.dev.conf`) serve `sitemap.xml`
-and `llms.txt` with real content types and 404 when they are missing, and a missing
-path 404s rather than falling back to the home page. Copy the config to the server
-and reload nginx after changing it.
+The site is served by the `reverse-proxy` container (nginx:1.25) on the VPS, which
+mounts `/srv/infrastructure/nginx/conf.d` at `/etc/nginx/conf.d`. `nginx/flowpro.conf`
+in this repo is a copy of `/srv/infrastructure/nginx/conf.d/flowpro.conf` as deployed,
+kept here so the config is reviewable; **CI does not deploy it**. After changing it:
+
+```bash
+scp nginx/flowpro.conf ubuntu@146.59.92.14:/tmp/
+ssh ubuntu@146.59.92.14 'cp /tmp/flowpro.conf /srv/infrastructure/nginx/conf.d/flowpro.conf   && docker exec reverse-proxy nginx -t && docker exec reverse-proxy nginx -s reload'
+```
+
+A missing path returns 404 rather than falling back to the home page. That matters
+here: a soft 404 serves a copy of the home page under every mistyped URL, which is
+exactly the "files that lie" failure the home page sells the fix for.

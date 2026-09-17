@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-const [home, homePl, legacy, sitemap, llms, robots, nginx, nginxLegacy] = await Promise.all([
+const [home, homePl, legacy, sitemap, llms, robots, nginx] = await Promise.all([
   readFile(new URL("../public/index.html", import.meta.url), "utf8"),
   readFile(new URL("../public/pl/index.html", import.meta.url), "utf8"),
   readFile(new URL("../public/automatyzacja/index.html", import.meta.url), "utf8"),
@@ -11,7 +11,6 @@ const [home, homePl, legacy, sitemap, llms, robots, nginx, nginxLegacy] = await 
   readFile(new URL("../public/llms.txt", import.meta.url), "utf8"),
   readFile(new URL("../public/robots.txt", import.meta.url), "utf8"),
   readFile(new URL("../nginx/flowpro.conf", import.meta.url), "utf8"),
-  readFile(new URL("../nginx/flowpro.dev.conf", import.meta.url), "utf8"),
 ]);
 
 function jsonLd(html) {
@@ -131,20 +130,20 @@ assert.doesNotMatch(robots, /^Disallow: \/$/m, "robots.txt must not block the wh
 assert.match(robots, /Sitemap: https:\/\/flowpro\.dev\/sitemap\.xml/);
 
 // ─── nginx ──────────────────────────────────────────────────────────────────
-for (const config of [nginx, nginxLegacy]) {
-  assert.match(
-    config,
-    /location = \/sitemap\.xml\s*{[\s\S]*?default_type application\/xml;[\s\S]*?try_files \$uri =404;\s*}/,
-  );
-  assert.match(
-    config,
-    /location = \/llms\.txt\s*{[\s\S]*?default_type text\/plain;[\s\S]*?try_files \$uri =404;\s*}/,
-  );
-  assert.match(
-    config,
-    /location \/ {\s*try_files \$uri \$uri\/ =404;\s*}/,
-    "a missing path must 404 rather than serve the home page",
-  );
-}
+// This file is a copy of what runs in the reverse-proxy container. It is not
+// deployed by CI, so the point of the check is that the copy stays honest.
+assert.match(
+  nginx,
+  /try_files \$uri \$uri\/ =404;/,
+  "a missing path must 404 rather than serve the home page",
+);
+assert.doesNotMatch(
+  nginx,
+  /try_files \$uri \$uri\/ \/index\.html;/,
+  "the soft-404 fallback must not come back",
+);
+assert.match(nginx, /root \/srv\/apps\/flowpro-dev;/, "document root must match the deploy target");
+assert.match(nginx, /server_name flowpro\.dev;/);
+assert.match(nginx, /reverse-proxy/, "the header must say where this file lives on the server");
 
 console.log("AEO checks passed");

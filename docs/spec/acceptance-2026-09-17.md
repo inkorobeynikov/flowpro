@@ -139,6 +139,8 @@ known. `tests/ai-visibility.test.mjs` fails the build if `2 900`, `€690` or
 | Founder photo | not supplied; the letter avatar is still in place |
 | Articles (`/articles/`) | out of scope, not created, not linked |
 | Rich Results Test | to run on the live URLs after deploy |
+| nginx soft-404 | **fixed on the server** 17 Sep: `try_files $uri $uri/ =404` in `/srv/infrastructure/nginx/conf.d/flowpro.conf`, validated and reloaded in the `reverse-proxy` container. `/nope/` and `/llms-full.txt` now return 404; all real pages, both redirects and flowpro.by verified unaffected. Backup kept beside it as `flowpro.conf.bak-20260917-150656` |
+| Forms API | **live**: `api.flowpro.dev` answers, preflight returns `access-control-allow-origin: https://flowpro.dev`, and an empty body gets `validation_error`. Field names are still unconfirmed against the real schema — watch `docker logs aeo-api` during the first real submission |
 
 ## Not a visual regression
 
