@@ -13,8 +13,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Validate every page against the checker rules
+        run: node tests/site.test.mjs
+
       - name: Validate AEO files and structured data
         run: node tests/aeo.test.mjs
+
+      - name: Validate the extension pages
+        run: node tests/ai-visibility.test.mjs
 
       - name: Copy files to server
         uses: appleboy/scp-action@v0.1.7
