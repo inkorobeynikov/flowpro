@@ -1,10 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://flowpro.dev/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowpro.dev/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://flowpro.dev/pl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpro.dev/"/>
+  </url>
+  <url>
+    <loc>https://flowpro.dev/pl/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowpro.dev/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://flowpro.dev/pl/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpro.dev/"/>
   </url>
   <url>
     <loc>https://flowpro.dev/ai-visibility/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowpro.dev/ai-visibility/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://flowpro.dev/pl/ai-visibility/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpro.dev/ai-visibility/"/>
+  </url>
+  <url>
+    <loc>https://flowpro.dev/pl/ai-visibility/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowpro.dev/ai-visibility/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://flowpro.dev/pl/ai-visibility/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpro.dev/ai-visibility/"/>
+  </url>
+  <url>
+    <loc>https://flowpro.dev/ai-visibility/fix/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowpro.dev/ai-visibility/fix/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://flowpro.dev/pl/ai-visibility/fix/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpro.dev/ai-visibility/fix/"/>
+  </url>
+  <url>
+    <loc>https://flowpro.dev/pl/ai-visibility/fix/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowpro.dev/ai-visibility/fix/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://flowpro.dev/pl/ai-visibility/fix/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpro.dev/ai-visibility/fix/"/>
+  </url>
+  <url>
+    <loc>https://flowpro.dev/about/</loc>
+  </url>
+  <url>
+    <loc>https://flowpro.dev/automatyzacja/</loc>
+  </url>
+  <url>
+    <loc>https://flowpro.dev/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowpro.dev/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://flowpro.dev/pl/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpro.dev/privacy/"/>
+  </url>
+  <url>
+    <loc>https://flowpro.dev/pl/privacy/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://flowpro.dev/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://flowpro.dev/pl/privacy/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://flowpro.dev/privacy/"/>
   </url>
   <url>
     <loc>https://flowpro.dev/ai-visibility/privacy/</loc>

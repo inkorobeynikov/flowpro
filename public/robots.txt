@@ -1,3 +1,38 @@
+# flowpro.dev — every documented AI search and user agent is allowed.
+# Training crawlers are allowed as well; that is a policy decision, not a
+# visibility one, and it is written down here so it stays a decision.
+
+# --- AI search crawlers (build the index answers are cited from) ---
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+# --- AI user agents (fetch a page live, for one person's question) ---
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# --- Training crawlers ---
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# --- Everyone else, including Googlebot and Bingbot ---
 User-agent: *
 Allow: /
 

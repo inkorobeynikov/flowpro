@@ -1,20 +1,62 @@
 # FlowPro
 
-> Automatyzacja i AI dla małych agencji nieruchomości (5–15 osób).
-> Wdrożenia dopasowane do konkretnych procesów biura — bez własnego działu IT i bez dużej firmy wdrożeniowej.
+> FlowPro checks whether AI assistants can read a website and implements the fixes.
+> A free Chrome extension runs 17 checks in the browser; the audit and the estimate
+> cost nothing, and the work is priced to the scope you agree. Operated by
+> Ivan Karabeinikau Digital Engineering (NIP: 9512646879), Warsaw, Poland.
+> English and Polish.
 
-## Co robimy
+## Free tool
 
-- Automatyzacja obsługi leadów: odpowiedzi, follow-up i dystrybucja zapytań
-- Automatyzacja ogłoszeń, marketingu i integracji narzędzi
-- Model współpracy: usługa zarządzana, nie sprzedaż oprogramowania
+- AI Visibility Checker (Chrome extension): 17 checks in four groups — crawlability,
+  structured data, meta tags, content structure. Runs locally, no account, audited
+  page data never leaves the browser.
+- Score 0–100 with four verdicts: Hard for AI to read (0–39), Partly readable by AI
+  (40–69), Readable by AI (70–89), Ready to be cited (90–100).
+- Landing page: https://flowpro.dev/ai-visibility/
 
-## Cennik
+## Free audit
 
-- Wdrożenie startowe jednego procesu: od 4 000 PLN netto
-- Miesięczna obsługa zarządzana: od 2 000 PLN netto / miesiąc
+- Send a website address and Ivan runs the check on your pages himself, then
+  replies within one business day with what is failing, which of it is worth
+  paying for, and which of it you could do yourself. No charge, no commitment.
 
-## Kontakt
+## Paid service
 
-- Strona: https://flowpro.dev/
+- AI Readiness Fix: robots.txt rules for documented AI crawlers, sitemap.xml and
+  llms.txt created or repaired, JSON-LD, meta tags and content structure on the
+  pages that matter, re-check with the extension plus a 30-day follow-up re-check.
+- Price: by estimate, itemised and agreed in writing before any work starts. Most
+  small-business sites land between 2 000 and 6 000 PLN net. Invoiced in PLN or EUR.
+  Not VAT-registered (art. 113 of the Polish VAT Act).
+- Page: https://flowpro.dev/ai-visibility/fix/
+
+## What FlowPro does not promise
+
+- No promise that ChatGPT, Claude, Perplexity or Gemini will mention or cite a site.
+  Platforms decide that, and most brand mentions in AI answers come from third-party
+  pages rather than the brand's own site.
+- The checker measures documented preconditions for access and interpretation. It
+  does not query any AI assistant.
+
+## Legacy offer
+
+- Automation and AI for Polish real-estate agencies (Polish language, separate
+  offer): https://flowpro.dev/automatyzacja/
+
+## Pages
+
+- Home (EN): https://flowpro.dev/
+- Home (PL): https://flowpro.dev/pl/
+- AI Visibility Checker (EN): https://flowpro.dev/ai-visibility/
+- AI Visibility Checker (PL): https://flowpro.dev/pl/ai-visibility/
+- AI Readiness Fix (EN): https://flowpro.dev/ai-visibility/fix/
+- AI Readiness Fix (PL): https://flowpro.dev/pl/ai-visibility/fix/
+- About: https://flowpro.dev/about/
+- Site privacy policy: https://flowpro.dev/privacy/
+- Extension privacy policy: https://flowpro.dev/ai-visibility/privacy/
+
+## Contact
+
 - Email: ivan@flowpro.dev
+- Address: ul. Bokserska 63, 02-690 Warszawa, Poland
