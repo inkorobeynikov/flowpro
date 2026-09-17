@@ -1,27 +1,27 @@
 <!doctype html>
-<html lang="en">
+<html lang="pl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Visibility Checker — Free Chrome Extension | FlowPro</title>
+    <title>AI Visibility Checker — bezpłatne rozszerzenie | FlowPro</title>
     <meta
       name="description"
-      content="Free Chrome extension: 17 checks show whether ChatGPT, Claude, Perplexity and Gemini can read and cite your website. No account, runs locally."
+      content="Bezpłatne rozszerzenie Chrome: 17 testów pokazuje, czy ChatGPT, Claude, Perplexity i Gemini potrafią czytać i cytować Twoją stronę. Bez konta, lokalnie."
     />
-    <link rel="canonical" href="https://flowpro.dev/ai-visibility/" />
+    <link rel="canonical" href="https://flowpro.dev/pl/ai-visibility/" />
     <link rel="alternate" hreflang="en" href="https://flowpro.dev/ai-visibility/" />
     <link rel="alternate" hreflang="pl" href="https://flowpro.dev/pl/ai-visibility/" />
     <link rel="alternate" hreflang="x-default" href="https://flowpro.dev/ai-visibility/" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://flowpro.dev/ai-visibility/" />
+    <meta property="og:url" content="https://flowpro.dev/pl/ai-visibility/" />
     <meta
       property="og:title"
-      content="AI Visibility Checker — Free Chrome Extension"
+      content="AI Visibility Checker — bezpłatne rozszerzenie Chrome"
     />
     <meta
       property="og:description"
-      content="See whether your website is ready to be read and cited by AI assistants, then get a prioritised list of fixes."
+      content="Sprawdź, czy Twoja strona jest gotowa, by asystenci AI mogli ją odczytać i cytować, a potem dostań listę poprawek."
     />
     <meta
       property="og:image"
@@ -58,11 +58,11 @@
         "@type": "SoftwareApplication",
         "@id": "https://flowpro.dev/ai-visibility/#software",
         "name": "AI Visibility Checker",
-        "description": "A free Chrome extension with 17 checks that shows whether a website is ready to be read and cited by AI assistants.",
-        "url": "https://flowpro.dev/ai-visibility/",
+        "description": "Bezpłatne rozszerzenie Chrome z 17 testami, które pokazuje, czy strona jest gotowa, by asystenci AI mogli ją odczytać i cytować.",
+        "url": "https://flowpro.dev/pl/ai-visibility/",
         "applicationCategory": "BrowserApplication",
         "operatingSystem": "Chrome",
-        "browserRequirements": "Requires Google Chrome",
+        "browserRequirements": "Wymaga przeglądarki Google Chrome",
         "isAccessibleForFree": true,
         "offers": {
           "@type": "Offer",
@@ -79,50 +79,50 @@
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What does the checker measure?",
+            "name": "Co mierzy test?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Whether a page and its site files meet the documented preconditions for AI systems to access and interpret them: crawler permissions, valid files, structured data, complete metadata and readable structure. It does not query any AI assistant."
+              "text": "Czy strona i pliki witryny spełniają udokumentowane warunki wstępne, by systemy AI mogły do nich dotrzeć i je zinterpretować: uprawnienia robotów, poprawne pliki, dane strukturalne, komplet metadanych i czytelną strukturę. Nie odpytuje żadnego asystenta AI."
             }
           },
           {
             "@type": "Question",
-            "name": "Is AI Visibility Checker free?",
+            "name": "Czy AI Visibility Checker jest bezpłatny?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes. The Chrome extension is free to install and use, with no account."
+              "text": "Tak. Rozszerzenie Chrome jest bezpłatne w instalacji i użyciu, bez konta."
             }
           },
           {
             "@type": "Question",
-            "name": "What data does the extension collect?",
+            "name": "Jakie dane zbiera rozszerzenie?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "None from the pages you audit. Checks run locally; the only network requests go to the audited site's own origin for robots.txt, sitemap.xml and llms.txt. Joining the waitlist submits your email to flowpro.dev, covered by the site privacy policy."
+              "text": "Żadnych ze stron, które audytujesz. Testy działają lokalnie; jedyne zapytania sieciowe idą do domeny audytowanej strony po robots.txt, sitemap.xml i llms.txt. Zapis na listę oczekujących wysyła Twój e-mail do flowpro.dev i podlega polityce prywatności serwisu."
             }
           },
           {
             "@type": "Question",
-            "name": "What is AI visibility?",
+            "name": "Czym jest widoczność w AI?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Whether AI assistants such as ChatGPT, Claude, Perplexity and Gemini can access your pages, understand what your business does and use them as sources. The terms AEO and GEO describe the same work; there is no agreed definition, and Google treats it as part of SEO."
+              "text": "Tym, czy asystenci AI, tacy jak ChatGPT, Claude, Perplexity i Gemini, mają dostęp do Twoich stron, rozumieją, czym zajmuje się Twoja firma, i używają ich jako źródeł. Terminy AEO i GEO opisują tę samą pracę; nie ma ich uzgodnionej definicji, a Google traktuje ją jako część SEO."
             }
           },
           {
             "@type": "Question",
-            "name": "Will a high score get me cited?",
+            "name": "Czy wysoki wynik zapewni mi cytowania?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Not by itself. A high score means your side is done: nothing technical stops an assistant from reading you. Mentions also depend on what other sites say about you and on each platform's own selection."
+              "text": "Sam z siebie nie. Wysoki wynik oznacza, że Twoja część jest zrobiona: nic technicznego nie przeszkadza asystentowi Cię przeczytać. Wzmianki zależą też od tego, co piszą o Tobie inne strony, i od własnych decyzji każdej platformy."
             }
           },
           {
             "@type": "Question",
-            "name": "Which crawlers does it check?",
+            "name": "Które roboty sprawdza?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "GPTBot (OpenAI), ClaudeBot (Anthropic) and PerplexityBot are the ones whose block is reported as a failure: block them and those assistants cannot read the site at all. OAI-SearchBot, Claude-Web, Google-Extended, Bingbot, CCBot and Applebot-Extended are checked too and reported as a warning, because blocking them narrows where you can appear rather than shutting you out entirely."
+              "text": "GPTBot (OpenAI), ClaudeBot (Anthropic) i PerplexityBot — ich blokada jest raportowana jako błąd: zablokowane, nie przeczytają strony w ogóle. OAI-SearchBot, Claude-Web, Google-Extended, Bingbot, CCBot i Applebot-Extended też są sprawdzane i raportowane jako ostrzeżenie, bo ich blokada zawęża miejsca, w których możesz się pojawić, zamiast odcinać Cię całkowicie."
             }
           }
         ]
@@ -799,9 +799,9 @@
     <script defer src="https://cloud.umami.is/script.js" data-website-id="{{UMAMI_WEBSITE_ID}}"></script>
   </head>
   <body>
-    <nav class="nav" aria-label="Main navigation">
+    <nav class="nav" aria-label="Nawigacja główna">
       <div class="container nav-inner">
-        <a href="/" class="logo" aria-label="FlowPro home">
+        <a href="/pl/" class="logo" aria-label="FlowPro — strona główna">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 28 20"
@@ -816,11 +816,11 @@
           <span>Flow<em>Pro</em></span>
         </a>
         <ul class="nav-links">
-          <li><a href="#checks">What it checks</a></li>
-          <li><a href="#how-it-works">How it works</a></li>
-          <li><a href="/ai-visibility/fix/">Fix service</a></li>
-          <li><a href="/pl/ai-visibility/" hreflang="pl">PL</a></li>
-          <li><a class="nav-cta" href="https://chromewebstore.google.com/detail/cffeopkncghiajcekbilommeckchjkbk" data-umami-event="install-extension">Install extension →</a></li>
+          <li><a href="#checks">Co sprawdza</a></li>
+          <li><a href="#how-it-works">Jak to działa</a></li>
+          <li><a href="/pl/ai-visibility/fix/">Wdrożenie</a></li>
+          <li><a href="/ai-visibility/" hreflang="en">EN</a></li>
+          <li><a class="nav-cta" href="https://chromewebstore.google.com/detail/cffeopkncghiajcekbilommeckchjkbk" data-umami-event="install-extension">Zainstaluj rozszerzenie →</a></li>
         </ul>
       </div>
     </nav>
@@ -829,56 +829,57 @@
       <section class="hero">
         <div class="container hero-grid">
           <div>
-            <span class="hero-kicker">Free Chrome extension</span>
+            <span class="hero-kicker">Bezpłatne rozszerzenie Chrome</span>
             <h1>
-              See if AI assistants can <span>read and cite</span> your website.
+              Sprawdź, czy asystenci AI potrafią
+              <span>czytać i cytować</span> Twoją stronę.
             </h1>
             <p class="hero-summary">
-              Run a practical AI-readiness audit in seconds and see exactly what
-              to fix first — without creating an account.
+              Uruchom praktyczny audyt gotowości na AI w kilka sekund i zobacz,
+              co poprawić najpierw — bez zakładania konta.
             </p>
             <div class="hero-actions">
               <a class="button" href="https://chromewebstore.google.com/detail/cffeopkncghiajcekbilommeckchjkbk"
-                 data-umami-event="install-extension">Install from Chrome Web Store
+                 data-umami-event="install-extension">Zainstaluj z Chrome Web Store
                 <span aria-hidden="true">→</span></a
               >
-              <a class="text-link" href="#checks">See what it checks</a>
+              <a class="text-link" href="#checks">Zobacz, co sprawdza</a>
             </div>
           </div>
           <div
             class="score-card"
-            aria-label="Example AI visibility score for flowpro.dev"
+            aria-label="Przykładowy wynik widoczności w AI dla flowpro.dev"
           >
             <div class="score-site">
-              flowpro.dev <span class="score-checked">Checked just now</span>
+              flowpro.dev <span class="score-checked">Sprawdzono przed chwilą</span>
             </div>
             <div class="score-top">
               <div class="score">78</div>
               <div class="score-context">
-                <span class="score-label">out of 100</span
-                ><strong>Readable by AI</strong>
-                <p>3 fixes would move this to “Ready to be cited”.</p>
+                <span class="score-label">na 100</span
+                ><strong>Czytelna dla AI</strong>
+                <p>3 poprawki podniosą ten wynik do „Gotowa do cytowania”.</p>
               </div>
             </div>
             <ul class="result-list">
               <li>
-                <span class="result-name">Crawler access</span
-                ><span class="result-state">Passed</span
+                <span class="result-name">Dostęp robotów</span
+                ><span class="result-state">OK</span
                 ><span class="result-bar" style="--score-width: 100%"></span>
               </li>
               <li>
                 <span class="result-name">Sitemap</span
-                ><span class="result-state">Found</span
+                ><span class="result-state">Jest</span
                 ><span class="result-bar" style="--score-width: 100%"></span>
               </li>
               <li>
-                <span class="result-name">Structured data</span
-                ><span class="result-state">2 fixes</span
+                <span class="result-name">Dane strukturalne</span
+                ><span class="result-state">2 poprawki</span
                 ><span class="result-bar" style="--score-width: 60%"></span>
               </li>
               <li>
-                <span class="result-name">Content structure</span
-                ><span class="result-state">1 fix</span
+                <span class="result-name">Struktura treści</span
+                ><span class="result-state">1 poprawka</span
                 ><span class="result-bar" style="--score-width: 78%"></span>
               </li>
             </ul>
@@ -888,68 +889,68 @@
 
       <section class="section section-alt" id="checks">
         <div class="container">
-          <span class="eyebrow">What it checks</span>
-          <h2>17 checks in four groups</h2>
+          <span class="eyebrow">Co sprawdza</span>
+          <h2>17 testów w czterech grupach</h2>
           <p class="section-intro">
-            The extension looks for the technical and content issues that make a
-            page harder for AI assistants and search engines to access or
-            interpret. Rules come from OpenAI, Anthropic, Perplexity and Google
-            documentation and from published studies; the weight of each check
-            follows the strength of its evidence.
+            Rozszerzenie szuka technicznych i treściowych problemów, które
+            utrudniają asystentom AI i wyszukiwarkom dostęp do strony lub jej
+            interpretację. Reguły pochodzą z dokumentacji OpenAI, Anthropic,
+            Perplexity i Google oraz z opublikowanych badań; waga każdego testu
+            odpowiada sile dowodów.
           </p>
           <div class="checks-grid">
             <article class="check-card">
               <div class="check-icon">R</div>
-              <h3>Crawlability</h3>
+              <h3>Dostęp robotów</h3>
               <p>
-                Reads robots.txt for the AI crawlers of OpenAI, Anthropic,
-                Perplexity, Google, Bing, Common Crawl and Apple, then checks
-                sitemap.xml and llms.txt exist, validate and are served as the
-                right content type.
+                Czyta robots.txt pod kątem botów AI OpenAI, Anthropic,
+                Perplexity, Google, Bing, Common Crawl i Apple, a potem
+                sprawdza, czy sitemap.xml i llms.txt istnieją, są poprawne i
+                serwowane z właściwym typem treści.
               </p>
             </article>
             <article class="check-card">
               <div class="check-icon">{ }</div>
-              <h3>Structured data</h3>
+              <h3>Dane strukturalne</h3>
               <p>
-                Finds JSON-LD and checks it parses, uses the right types for the
-                page (Organization, Service, Product, FAQPage) and doesn't
-                contradict the visible text.
+                Znajduje JSON-LD i sprawdza, czy się parsuje, czy używa
+                właściwych typów dla strony (Organization, Service, Product,
+                FAQPage) i czy nie przeczy widocznemu tekstowi.
               </p>
             </article>
             <article class="check-card">
               <div class="check-icon">M</div>
-              <h3>Meta tags</h3>
+              <h3>Meta tagi</h3>
               <p>
-                Title and description length, canonical, language, and a
-                complete Open Graph set so the page is indexable and previews
-                correctly.
+                Długość title i description, canonical, język i komplet Open
+                Graph, żeby strona była indeksowalna i poprawnie wyświetlała
+                podgląd.
               </p>
             </article>
             <article class="check-card">
               <div class="check-icon">H</div>
-              <h3>Content structure</h3>
+              <h3>Struktura treści</h3>
               <p>
-                One H1, a sane heading hierarchy, an opening paragraph that
-                answers “what is this page” in under 60 words, and a Q&amp;A
-                block with direct answers.
+                Jeden H1, sensowna hierarchia nagłówków, wstęp odpowiadający na
+                pytanie „czym jest ta strona” w mniej niż 60 słowach oraz blok
+                pytań i odpowiedzi.
               </p>
             </article>
           </div>
           <div class="score-explainer">
-            <div class="score-badge">0–100 <small>score</small></div>
+            <div class="score-badge">0–100 <small>wynik</small></div>
             <div>
               <strong
-                >One score, four verdicts, then the fixes that matter
-                most.</strong
+                >Jeden wynik, cztery werdykty, potem poprawki, które mają
+                znaczenie.</strong
               >
               <p>
-                <em>Hard for AI to read</em> (0–39) ·
-                <em>Partly readable by AI</em> (40–69) ·
-                <em>Readable by AI</em> (70–89) ·
-                <em>Ready to be cited</em> (90–100). Blockers first, then
-                improvements. The score is a diagnostic guide, not a promise of
-                inclusion or ranking.
+                <em>Trudna do odczytu dla AI</em> (0–39) ·
+                <em>Częściowo czytelna dla AI</em> (40–69) ·
+                <em>Czytelna dla AI</em> (70–89) ·
+                <em>Gotowa do cytowania</em> (90–100). Najpierw blokery, potem
+                ulepszenia. Wynik jest wskazówką diagnostyczną, nie obietnicą
+                obecności w odpowiedziach ani pozycji.
               </p>
             </div>
           </div>
@@ -959,30 +960,30 @@
       <section class="section" id="how-it-works">
         <div class="container privacy-grid">
           <div>
-            <span class="eyebrow">How it works</span>
-            <h2>Your audit stays in your browser</h2>
+            <span class="eyebrow">Jak to działa</span>
+            <h2>Twój audyt zostaje w Twojej przeglądarce</h2>
             <p class="section-intro">
-              Open the extension on any page and start the check. It reads the
-              page and the site's public files from your browser, then builds
-              the report locally.
+              Otwórz rozszerzenie na dowolnej stronie i uruchom test. Czyta
+              stronę i publiczne pliki witryny w Twojej przeglądarce, a potem
+              buduje raport lokalnie.
             </p>
             <ul class="privacy-points">
               <li>
-                <span class="tick">✓</span><span>No account or sign-in</span>
+                <span class="tick">✓</span><span>Bez konta i logowania</span>
               </li>
               <li>
                 <span class="tick">✓</span
-                ><span>No audited page data leaves your browser</span>
+                ><span>Żadne dane audytowanej strony nie opuszczają przeglądarki</span>
               </li>
               <li>
                 <span class="tick">✓</span
-                ><span>Results appear in seconds</span>
+                ><span>Wynik w kilka sekund</span>
               </li>
             </ul>
           </div>
           <div
             class="local-card"
-            aria-label="Diagram showing a local browser audit"
+            aria-label="Schemat audytu wykonywanego lokalnie w przeglądarce"
           >
             <div class="local-browser">
               <div class="browser-bar">
@@ -991,22 +992,22 @@
               <div class="local-flow">
                 <div class="flow-node">
                   <div class="flow-icon">⌂</div>
-                  Your website
+                  Twoja strona
                 </div>
                 <div class="flow-arrow" aria-hidden="true">→</div>
                 <div class="flow-node">
                   <div class="flow-icon">✦</div>
-                  Local audit
+                  Audyt lokalny
                 </div>
                 <div class="flow-arrow" aria-hidden="true">→</div>
                 <div class="flow-node">
                   <div class="flow-icon">✓</div>
-                  Your report
+                  Twój raport
                 </div>
               </div>
             </div>
             <p class="local-note">
-              Website data stays on your device throughout the audit.
+              Dane strony zostają na Twoim urządzeniu przez cały audyt.
             </p>
           </div>
         </div>
@@ -1014,28 +1015,28 @@
 
       <section class="section section-alt" id="next">
         <div class="container">
-          <span class="eyebrow">What next</span>
-          <h2>Got a list of fixes? Two ways to clear it</h2>
+          <span class="eyebrow">Co dalej</span>
+          <h2>Masz listę poprawek? Dwie drogi, żeby ją zamknąć</h2>
           <div class="checks-grid">
             <article class="check-card">
               <div class="check-icon">1</div>
-              <h3>Do it yourself</h3>
+              <h3>Zrób to sam</h3>
               <p>
-                Each failed check links to a short explanation with the exact
-                file or tag to change. Most fixes are a few lines in robots.txt,
-                a corrected sitemap, a JSON-LD block or a rewritten opening
-                paragraph.
+                Każdy niezaliczony test prowadzi do krótkiego wyjaśnienia z
+                dokładnym plikiem lub tagiem do zmiany. Większość poprawek to
+                kilka linii w robots.txt, poprawiona sitemap, blok JSON-LD albo
+                przepisany wstęp.
               </p>
             </article>
             <article class="check-card">
               <div class="check-icon">2</div>
-              <h3>Have me do it</h3>
+              <h3>Zleć to mnie</h3>
               <p>
-                Send me the address. I go through your pages myself and tell you
-                what is worth fixing — free — then price the ones you choose and
-                verify them with the same check.
-                <a class="text-link" href="/ai-visibility/fix/"
-                   data-umami-event="view-fix-service">See the fix service →</a
+                Wyślij adres. Sam przejdę przez Twoje podstrony i powiem, co
+                warto poprawić — bezpłatnie — a potem wycenię to, co wybierzesz,
+                i zweryfikuję tym samym testem.
+                <a class="text-link" href="/pl/ai-visibility/fix/"
+                   data-umami-event="view-fix-service">Zobacz usługę wdrożenia →</a
                 >
               </p>
             </article>
@@ -1045,13 +1046,13 @@
 
       <section class="section waitlist" id="waitlist">
         <div class="container waitlist-inner">
-          <span class="eyebrow">Live check</span>
-          <h2>Get notified when the live check launches</h2>
+          <span class="eyebrow">Live-check</span>
+          <h2>Daj znać, kiedy ruszy live-check</h2>
           <p>
-            The next version asks ChatGPT, Claude, Gemini and Perplexity about
-            your brand and reports mentions, share of voice against competitors
-            and a weekly history. Enter your email and we'll send one message
-            when it's ready.
+            Kolejna wersja pyta ChatGPT, Claude, Gemini i Perplexity o Twoją
+            markę i raportuje wzmianki, udział w odpowiedziach na tle
+            konkurencji oraz tygodniową historię. Podaj e-mail, a wyślemy jedną
+            wiadomość, gdy będzie gotowa.
           </p>
           <form
             class="waitlist-form"
@@ -1073,25 +1074,25 @@
                 white-space: nowrap;
                 border: 0;
               "
-              >Email address</label
+              >Adres e-mail</label
             >
             <input
               id="waitlist-email"
               name="email"
               type="email"
               autocomplete="email"
-              placeholder="you@company.com"
+              placeholder="ty@firma.pl"
               required
             />
             <span aria-hidden="true" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">
-              <label for="waitlist-company">Company (leave this field empty)</label>
+              <label for="waitlist-company">Firma (zostaw to pole puste)</label>
               <input id="waitlist-company" name="company" type="text" tabindex="-1" autocomplete="off" />
             </span>
             <input type="hidden" name="src" value="" />
             <input type="hidden" name="ref" value="" />
             <input type="hidden" name="lang" value="" />
             <input type="hidden" name="page" value="" />
-            <button class="button" type="submit" data-umami-event="submit-waitlist">Notify me</button>
+            <button class="button" type="submit" data-umami-event="submit-waitlist">Powiadom mnie</button>
           </form>
           <div
             class="form-success"
@@ -1099,16 +1100,15 @@
             role="status"
             tabindex="-1"
           >
-            You're on the list. We'll send one email when the live check
-            launches.
+            Jesteś na liście. Wyślemy jeden e-mail, gdy live-check wystartuje.
           </div>
           <p class="form-note" id="form-error" role="alert" hidden>
-            The form could not be sent. Send your address by email instead: <a id="form-error-mailto" href="mailto:ivan@flowpro.dev">ivan@flowpro.dev</a>.
+            Nie udało się wysłać formularza. Wyślij swój adres e-mailem: <a id="form-error-mailto" href="mailto:ivan@flowpro.dev">ivan@flowpro.dev</a>.
           </p>
           <p class="form-note">
-            One launch email only. No newsletter. You can ask for deletion at any
-            time — see the
-            <a href="/privacy/">privacy policy</a>.
+            Tylko jeden e-mail o starcie. Bez newslettera. W każdej chwili
+            możesz poprosić o usunięcie adresu — zobacz
+            <a href="/pl/privacy/">politykę prywatności</a>.
           </p>
         </div>
       </section>
@@ -1117,32 +1117,32 @@
         <div class="container faq-wrap">
           <div>
             <span class="eyebrow">FAQ</span>
-            <h2>Quick answers</h2>
+            <h2>Krótkie odpowiedzi</h2>
           </div>
           <div class="faq-list">
             <article class="faq-item">
-              <h3>What does the checker measure?</h3>
-              <p>Whether a page and its site files meet the documented preconditions for AI systems to access and interpret them: crawler permissions, valid files, structured data, complete metadata and readable structure. It does not query any AI assistant.</p>
+              <h3>Co mierzy test?</h3>
+              <p>Czy strona i pliki witryny spełniają udokumentowane warunki wstępne, by systemy AI mogły do nich dotrzeć i je zinterpretować: uprawnienia robotów, poprawne pliki, dane strukturalne, komplet metadanych i czytelną strukturę. Nie odpytuje żadnego asystenta AI.</p>
             </article>
             <article class="faq-item">
-              <h3>Is AI Visibility Checker free?</h3>
-              <p>Yes. The Chrome extension is free to install and use, with no account.</p>
+              <h3>Czy AI Visibility Checker jest bezpłatny?</h3>
+              <p>Tak. Rozszerzenie Chrome jest bezpłatne w instalacji i użyciu, bez konta.</p>
             </article>
             <article class="faq-item">
-              <h3>What data does the extension collect?</h3>
-              <p>None from the pages you audit. Checks run locally; the only network requests go to the audited site's own origin for robots.txt, sitemap.xml and llms.txt. Joining the waitlist submits your email to flowpro.dev, covered by the site privacy policy.</p>
+              <h3>Jakie dane zbiera rozszerzenie?</h3>
+              <p>Żadnych ze stron, które audytujesz. Testy działają lokalnie; jedyne zapytania sieciowe idą do domeny audytowanej strony po robots.txt, sitemap.xml i llms.txt. Zapis na listę oczekujących wysyła Twój e-mail do flowpro.dev i podlega polityce prywatności serwisu.</p>
             </article>
             <article class="faq-item">
-              <h3>What is AI visibility?</h3>
-              <p>Whether AI assistants such as ChatGPT, Claude, Perplexity and Gemini can access your pages, understand what your business does and use them as sources. The terms AEO and GEO describe the same work; there is no agreed definition, and Google treats it as part of SEO.</p>
+              <h3>Czym jest widoczność w AI?</h3>
+              <p>Tym, czy asystenci AI, tacy jak ChatGPT, Claude, Perplexity i Gemini, mają dostęp do Twoich stron, rozumieją, czym zajmuje się Twoja firma, i używają ich jako źródeł. Terminy AEO i GEO opisują tę samą pracę; nie ma ich uzgodnionej definicji, a Google traktuje ją jako część SEO.</p>
             </article>
             <article class="faq-item">
-              <h3>Will a high score get me cited?</h3>
-              <p>Not by itself. A high score means your side is done: nothing technical stops an assistant from reading you. Mentions also depend on what other sites say about you and on each platform's own selection.</p>
+              <h3>Czy wysoki wynik zapewni mi cytowania?</h3>
+              <p>Sam z siebie nie. Wysoki wynik oznacza, że Twoja część jest zrobiona: nic technicznego nie przeszkadza asystentowi Cię przeczytać. Wzmianki zależą też od tego, co piszą o Tobie inne strony, i od własnych decyzji każdej platformy.</p>
             </article>
             <article class="faq-item">
-              <h3>Which crawlers does it check?</h3>
-              <p>GPTBot (OpenAI), ClaudeBot (Anthropic) and PerplexityBot are the ones whose block is reported as a failure: block them and those assistants cannot read the site at all. OAI-SearchBot, Claude-Web, Google-Extended, Bingbot, CCBot and Applebot-Extended are checked too and reported as a warning, because blocking them narrows where you can appear rather than shutting you out entirely.</p>
+              <h3>Które roboty sprawdza?</h3>
+              <p>GPTBot (OpenAI), ClaudeBot (Anthropic) i PerplexityBot — ich blokada jest raportowana jako błąd: zablokowane, nie przeczytają strony w ogóle. OAI-SearchBot, Claude-Web, Google-Extended, Bingbot, CCBot i Applebot-Extended też są sprawdzane i raportowane jako ostrzeżenie, bo ich blokada zawęża miejsca, w których możesz się pojawić, zamiast odcinać Cię całkowicie.</p>
             </article>
           </div>
         </div>
@@ -1152,7 +1152,7 @@
     <footer>
       <div class="container">
         <div class="footer-top">
-          <a href="/" class="footer-logo" aria-label="FlowPro home">
+          <a href="/pl/" class="footer-logo" aria-label="FlowPro — strona główna">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 28 20"
@@ -1166,15 +1166,15 @@
             </svg>
             <span>Flow<em>Pro</em></span>
           </a>
-          <nav class="footer-links" aria-label="Footer navigation">
-            <a href="/">FlowPro home</a>
-            <a href="/ai-visibility/">AI Visibility Checker</a>
-            <a href="/ai-visibility/fix/">Fix service</a>
-            <a href="/automatyzacja/" hreflang="pl">Automatyzacja (legacy)</a>
-            <a href="/about/">About</a>
-            <a href="/privacy/">Privacy</a>
-            <a href="/ai-visibility/privacy/">Extension privacy</a>
-            <a href="/pl/ai-visibility/" hreflang="pl">Polski</a>
+          <nav class="footer-links" aria-label="Nawigacja w stopce">
+            <a href="/pl/">FlowPro</a>
+            <a href="/pl/ai-visibility/">AI Visibility Checker</a>
+            <a href="/pl/ai-visibility/fix/">Wdrożenie</a>
+            <a href="/automatyzacja/">Automatyzacja (legacy)</a>
+            <a href="/about/" hreflang="en">O mnie</a>
+            <a href="/pl/privacy/">Prywatność</a>
+            <a href="/ai-visibility/privacy/" hreflang="en">Prywatność rozszerzenia</a>
+            <a href="/ai-visibility/" hreflang="en">English</a>
             <a href="mailto:ivan@flowpro.dev">ivan@flowpro.dev</a>
           </nav>
         </div>

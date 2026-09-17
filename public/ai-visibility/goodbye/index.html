@@ -221,6 +221,7 @@
         }
       }
     </style>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="{{UMAMI_WEBSITE_ID}}"></script>
   </head>
   <body>
     <nav class="nav" aria-label="Main navigation">
@@ -252,52 +253,55 @@
           <form
             class="feedback-form"
             id="feedback-form"
-            action="GOOGLE_FORM_ACTION_URL"
             method="post"
-            target="feedback-submit-frame"
+            novalidate
           >
             <fieldset>
               <legend>What was missing?</legend>
               <label class="choice"
                 ><input
                   type="radio"
-                  name="entry.FEEDBACK_REASON_ENTRY_ID"
+                  name="reason"
                   value="Wrong results"
                   required
                 />Wrong results</label
               ><label class="choice"
                 ><input
                   type="radio"
-                  name="entry.FEEDBACK_REASON_ENTRY_ID"
+                  name="reason"
                   value="Not useful for my site"
                 />Not useful for my site</label
               ><label class="choice"
                 ><input
                   type="radio"
-                  name="entry.FEEDBACK_REASON_ENTRY_ID"
+                  name="reason"
                   value="Too technical"
                 />Too technical</label
               ><label class="choice"
                 ><input
                   type="radio"
-                  name="entry.FEEDBACK_REASON_ENTRY_ID"
+                  name="reason"
                   value="Just testing"
                 />Just testing</label
               ><label class="choice"
                 ><input
                   id="other-choice"
                   type="radio"
-                  name="entry.FEEDBACK_REASON_ENTRY_ID"
+                  name="reason"
                   value="Other"
                 />Other</label
               ><label for="other-detail" hidden>Tell us what was missing</label
               ><textarea
                 id="other-detail"
-                name="entry.FEEDBACK_OTHER_ENTRY_ID"
+                name="detail"
                 placeholder="Tell us what was missing"
               ></textarea>
             </fieldset>
-            <button class="button" type="submit">Send</button>
+            <span aria-hidden="true" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"><label for="feedback-company">Company (leave this field empty)</label><input id="feedback-company" name="company" type="text" tabindex="-1" autocomplete="off" /></span>
+            <input type="hidden" name="src" value="extension-uninstall" />
+            <input type="hidden" name="lang" value="" />
+            <input type="hidden" name="page" value="" />
+            <button class="button" type="submit" data-umami-event="submit-uninstall-feedback">Send</button>
           </form>
           <div
             class="form-success"
@@ -311,11 +315,10 @@
               Checker.
             </p>
           </div>
-          <iframe
-            name="feedback-submit-frame"
-            title="Feedback form submission"
-            hidden
-          ></iframe>
+          <p class="form-note" id="form-error" role="alert" hidden>
+            The form could not be sent. Send the same note by email instead:
+            <a id="form-error-mailto" href="mailto:ivan@flowpro.dev">ivan@flowpro.dev</a>.
+          </p>
         </article>
       </div>
     </main>
@@ -325,21 +328,56 @@
       </div>
     </footer>
     <script>
-      const feedbackForm = document.getElementById("feedback-form");
-      const successMessage = document.getElementById("form-success");
-      const otherChoice = document.getElementById("other-choice");
-      const otherDetail = document.getElementById("other-detail");
-      feedbackForm.addEventListener("change", () => {
-        otherDetail.style.display = otherChoice.checked ? "block" : "none";
-        otherDetail.required = otherChoice.checked;
-      });
-      feedbackForm.addEventListener("submit", () => {
-        window.setTimeout(() => {
-          feedbackForm.hidden = true;
-          successMessage.classList.add("visible");
-          successMessage.focus();
-        }, 500);
-      });
+      (function () {
+        var ENDPOINT = "https://api.flowpro.dev/v1/site/feedback";
+        var form = document.getElementById("feedback-form");
+        var success = document.getElementById("form-success");
+        var failure = document.getElementById("form-error");
+        var mailtoLink = document.getElementById("form-error-mailto");
+        var otherChoice = document.getElementById("other-choice");
+        var otherDetail = document.getElementById("other-detail");
+        var button = form.querySelector("button[type=submit]");
+        form.elements.lang.value = document.documentElement.lang;
+        form.elements.page.value = window.location.pathname;
+
+        form.addEventListener("change", function () {
+          otherDetail.style.display = otherChoice.checked ? "block" : "none";
+          otherDetail.required = otherChoice.checked;
+        });
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          if (form.elements.company.value) return; /* honeypot: silently drop bots */
+          var reason = form.querySelector("input[name=reason]:checked");
+          var data = {
+            reason: reason ? reason.value : "",
+            detail: otherDetail.value.trim(),
+            src: form.elements.src.value,
+            lang: form.elements.lang.value,
+            page: form.elements.page.value
+          };
+          button.disabled = true;
+          failure.hidden = true;
+          fetch(ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+          })
+            .then(function (response) {
+              if (!response.ok) throw new Error("HTTP " + response.status);
+              form.hidden = true;
+              success.classList.add("visible");
+              success.focus();
+            })
+            .catch(function () {
+              button.disabled = false;
+              mailtoLink.href = "mailto:ivan@flowpro.dev?subject=" +
+                encodeURIComponent("AI Visibility Checker feedback") +
+                "&body=" + encodeURIComponent(data.reason + String.fromCharCode(10, 10) + data.detail);
+              failure.hidden = false;
+            });
+        });
+      })();
     </script>
   </body>
 </html>

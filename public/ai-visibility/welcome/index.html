@@ -371,6 +371,7 @@
         }
       }
     </style>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="{{UMAMI_WEBSITE_ID}}"></script>
   </head>
   <body>
     <nav class="nav" aria-label="Main navigation">
@@ -462,19 +463,18 @@
               <form
                 class="waitlist-form"
                 id="waitlist-form"
-                action="GOOGLE_FORM_ACTION_URL"
                 method="post"
-                target="waitlist-submit-frame"
+                novalidate
               >
                 <label for="waitlist-email" hidden>Email address</label
                 ><input
                   id="waitlist-email"
-                  name="entry.EMAIL_ENTRY_ID"
+                  name="email"
                   type="email"
                   autocomplete="email"
                   placeholder="you@company.com"
                   required
-                /><button class="button" type="submit">Notify me</button>
+                /><span aria-hidden="true" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;"><label for="waitlist-company">Company (leave this field empty)</label><input id="waitlist-company" name="company" type="text" tabindex="-1" autocomplete="off" /></span><input type="hidden" name="src" value="extension-welcome" /><input type="hidden" name="ref" value="" /><input type="hidden" name="lang" value="" /><input type="hidden" name="page" value="" /><button class="button" type="submit" data-umami-event="submit-waitlist">Notify me</button>
               </form>
               <div
                 class="form-success"
@@ -485,17 +485,16 @@
                 You're on the list. We'll let you know when the live check
                 launches.
               </div>
+              <p class="form-note" id="form-error" role="alert" hidden>
+                The form could not be sent. Send your address by email instead:
+                <a id="form-error-mailto" href="mailto:ivan@flowpro.dev">ivan@flowpro.dev</a>.
+              </p>
               <p class="form-note">Email only. No product newsletter.</p>
               <p class="privacy-link">
                 <a href="/ai-visibility/privacy/"
                   >Read the extension privacy policy</a
                 >
               </p>
-              <iframe
-                name="waitlist-submit-frame"
-                title="Waitlist form submission"
-                hidden
-              ></iframe>
             </section>
           </div>
         </article>
@@ -507,15 +506,51 @@
       </div>
     </footer>
     <script>
-      const waitlistForm = document.getElementById("waitlist-form");
-      const successMessage = document.getElementById("form-success");
-      waitlistForm.addEventListener("submit", () => {
-        window.setTimeout(() => {
-          waitlistForm.hidden = true;
-          successMessage.classList.add("visible");
-          successMessage.focus();
-        }, 500);
-      });
+      (function () {
+        var ENDPOINT = "https://api.flowpro.dev/v1/site/waitlist";
+        var form = document.getElementById("waitlist-form");
+        var success = document.getElementById("form-success");
+        var failure = document.getElementById("form-error");
+        var mailtoLink = document.getElementById("form-error-mailto");
+        var button = form.querySelector("button[type=submit]");
+        var params = new URLSearchParams(window.location.search);
+        var ref = params.get("ref");
+        if (ref) form.elements.ref.value = ref.slice(0, 200);
+        form.elements.lang.value = document.documentElement.lang;
+        form.elements.page.value = window.location.pathname;
+
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          if (form.elements.company.value) return; /* honeypot: silently drop bots */
+          var data = {
+            email: form.elements.email.value.trim(),
+            src: form.elements.src.value,
+            ref: form.elements.ref.value,
+            lang: form.elements.lang.value,
+            page: form.elements.page.value
+          };
+          button.disabled = true;
+          failure.hidden = true;
+          fetch(ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+          })
+            .then(function (response) {
+              if (!response.ok) throw new Error("HTTP " + response.status);
+              form.hidden = true;
+              success.classList.add("visible");
+              success.focus();
+            })
+            .catch(function () {
+              button.disabled = false;
+              mailtoLink.href = "mailto:ivan@flowpro.dev?subject=" +
+                encodeURIComponent("Live check waitlist") +
+                "&body=" + encodeURIComponent(data.email);
+              failure.hidden = false;
+            });
+        });
+      })();
     </script>
   </body>
 </html>
