@@ -3,7 +3,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
-const [checker, checkerPl, fix, fixPl, privacy, sitePrivacy, welcome, goodbye, home] =
+const [checker, checkerPl, fix, fixPl, privacy, sitePrivacy, welcome, goodbye, home, webCheck] =
   await Promise.all(
     [
       "../public/ai-visibility/index.html",
@@ -15,6 +15,7 @@ const [checker, checkerPl, fix, fixPl, privacy, sitePrivacy, welcome, goodbye, h
       "../public/ai-visibility/welcome/index.html",
       "../public/ai-visibility/goodbye/index.html",
       "../public/index.html",
+      "../public/ai-visibility/check/index.html",
     ].map((path) => readFile(new URL(path, import.meta.url), "utf8")),
   );
 
@@ -125,6 +126,7 @@ const forms = [
   ["checker (EN)", checker, "https://api.flowpro.dev/v1/site/waitlist", ["email", "src", "ref", "lang", "page"]],
   ["checker (PL)", checkerPl, "https://api.flowpro.dev/v1/site/waitlist", ["email", "src", "ref", "lang", "page"]],
   ["welcome", welcome, "https://api.flowpro.dev/v1/site/waitlist", ["email", "src", "ref", "lang", "page"]],
+  ["web check", webCheck, "https://api.flowpro.dev/v1/site/waitlist", ["email", "src", "ref", "lang", "page"]],
   // /v1/site/feedback does not exist yet, so this form always falls back to mailto:.
   ["goodbye", goodbye, "https://api.flowpro.dev/v1/site/feedback", ["reason", "detail", "src", "lang", "page"]],
 ];
@@ -161,6 +163,132 @@ for (const [name, html] of [["fix (EN)", fix], ["fix (PL)", fixPl]]) {
   assert.doesNotMatch(html, /name="(platform|notes)"/, `${name}: the API rejects platform and notes`);
   assert.match(html, /data\.score = Number\(score\)/, `${name}: score must be sent as a number`);
   assert.match(html, /if \(data\[key\] === ""\) delete data\[key\]/, `${name}: empty optional fields must be left out`);
+}
+
+// ─── Online check ───────────────────────────────────────────────────────────
+// The page renders POST /v1/site/check output and nothing else: no check logic, no innerHTML.
+assert.ok(
+  webCheck.includes('var CHECK_ENDPOINT = "https://api.flowpro.dev/v1/site/check"'),
+  "web check: wrong API endpoint",
+);
+assert.doesNotMatch(
+  webCheck,
+  /innerHTML|outerHTML|insertAdjacentHTML|document\.write/,
+  "web check: report data must be rendered with textContent",
+);
+{
+  const types = jsonLd(webCheck).map((block) => block["@type"]);
+  for (const type of ["WebApplication", "BreadcrumbList", "Organization"]) {
+    assert.ok(types.includes(type), `web check: missing ${type} schema`);
+  }
+}
+const webCheckText = webCheck.replace(/\s+/g, " ");
+for (const copy of [
+  "Run check",
+  "this takes up to 15 seconds",
+  "Checked the HTML your server sends, before JavaScript runs — the way most AI crawlers read it. The Chrome extension checks the page as rendered in your browser.",
+  '"Fixing the " + data.failCount + " failing check"',
+  '" would bring it to about " + data.potentialScore',
+  '"Fix first"',
+  '"Improve"',
+  '"Passed"',
+  "Copy snippet",
+  "Get all of this fixed — free audit and quote",
+  "Get notified when weekly monitoring launches",
+  "Check pages from your browser — install the extension",
+  "Nothing to fix.",
+  "Try again",
+  "That address points to a private network, so it can't be checked.",
+  "We couldn't reach that site. Check the address and try again.",
+  "The site took longer than 15 seconds to answer.",
+  '"The site refused our checker (HTTP " + status + "). Some firewalls block automated requests — the Chrome extension checks from your own browser."',
+  '"The page returned HTTP " + status + "."',
+  '"That address returns " + data.contentType + ", not a web page."',
+  "Too many checks from your network. Try again in a few minutes.",
+  "The checker is busy. Try again in a minute.",
+  "Something went wrong on our side. Try again in a minute.",
+]) {
+  assert.ok(webCheckText.includes(copy), `web check: missing copy: ${copy}`);
+}
+assert.ok(
+  webCheck.includes(`href="${STORE_URL}" data-umami-event="install-extension">Check pages from your browser`),
+  "web check: the extension CTA must link to the store and be tagged",
+);
+assert.match(webCheck, /id="cta-fix"[^>]*data-umami-event="request-fix"/, "web check: summary CTA must be tagged");
+assert.match(webCheck, /setAttribute\("data-umami-event", "request-fix"\)/, "web check: per-check CTAs must be tagged");
+assert.match(
+  webCheck,
+  /setAttribute\("data-umami-event-check", check\.id\)/,
+  "web check: per-check CTAs must carry the check id",
+);
+assert.match(webCheck, /params\.set\("src", "web-check"\)/, "web check: CTAs must say where the request came from");
+assert.match(webCheck, /fixLink\("web-check-summary", context\)/, "web check: the summary CTA uses ref=web-check-summary");
+assert.match(webCheck, /name="src" value="web-check"/, "web check: monitoring signups carry src=web-check");
+assert.match(webCheck, /name="ref" value="monitoring"/, "web check: monitoring signups carry ref=monitoring");
+for (const [name, html] of [["checker (EN)", checker], ["home", home]]) {
+  assert.match(
+    html,
+    /href="\/ai-visibility\/check\/"[^>]*data-umami-event="view-web-check"[^>]*>\s*Check any URL online/,
+    `${name}: must link to the online check`,
+  );
+}
+
+// Every check in @aeo/core has its own call to action on the online check. The ids come
+// from the sibling aeo-checker repo when it is checked out next to this one; CI checks out
+// only this repo, so the fallback is a copy of aeo-checker/packages/core/src/checks/index.ts.
+const CORE_CHECK_IDS = [
+  "robots-ai-bots",
+  "sitemap",
+  "llms-txt",
+  "canonical",
+  "jsonld-valid",
+  "org-schema",
+  "faq-schema",
+  "offer-schema",
+  "title",
+  "meta-description",
+  "open-graph",
+  "html-basics",
+  "single-h1",
+  "heading-hierarchy",
+  "qa-block",
+  "opening-paragraph",
+  "text-length",
+];
+async function coreCheckIds() {
+  const checksDir = new URL("../../aeo-checker/packages/core/src/checks/", import.meta.url);
+  let registry;
+  try {
+    registry = await readFile(new URL("index.ts", checksDir), "utf8");
+  } catch (error) {
+    if (error.code === "ENOENT") return { ids: CORE_CHECK_IDS, source: "the copied list" };
+    throw error;
+  }
+  const files = [...registry.matchAll(/from "\.\/([\w-]+)"/g)].map((match) => match[1]);
+  const ids = await Promise.all(
+    files.map(async (file) => {
+      const source = await readFile(new URL(`${file}.ts`, checksDir), "utf8");
+      const id = source.match(/id: "([\w-]+)"/)?.[1];
+      assert.ok(id, `could not read the check id from ${file}.ts`);
+      return id;
+    }),
+  );
+  assert.deepEqual(ids, CORE_CHECK_IDS, "CORE_CHECK_IDS is out of date with aeo-checker; copy the ids again");
+  return { ids, source: "aeo-checker" };
+}
+{
+  const { ids, source } = await coreCheckIds();
+  const labelsSource = webCheck.match(/var CTA_LABELS = (\{[\s\S]*?\});/)?.[1];
+  assert.ok(labelsSource, "web check: CTA_LABELS map is missing");
+  const labels = JSON.parse(labelsSource);
+  for (const id of ids) {
+    assert.ok(labels[id], `web check: no call to action for the ${id} check (ids from ${source})`);
+  }
+  for (const [id, label] of Object.entries(labels)) {
+    assert.match(label, /^Have me [a-z]/, `web check: the ${id} label must be "Have me …" in sentence case`);
+    assert.doesNotMatch(label, /\d|zł|PLN|€|\$/, `web check: the ${id} label must not carry a price`);
+  }
+  assert.ok(webCheck.includes('var FALLBACK_LABEL = "Have me fix this"'), "web check: unknown ids need a fallback label");
 }
 
 // ─── Privacy policies ───────────────────────────────────────────────────────

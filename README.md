@@ -13,6 +13,7 @@ public/
   pl/index.html                   ← Home (PL)
   ai-visibility/index.html        ← AI Visibility Checker (EN)
   pl/ai-visibility/index.html     ← AI Visibility Checker (PL)
+  ai-visibility/check/index.html  ← Online check: paste a URL, get the score (EN only)
   ai-visibility/fix/index.html    ← AI Readiness Fix service (EN)
   pl/ai-visibility/fix/index.html ← AI Readiness Fix service (PL)
   ai-visibility/privacy/          ← Extension privacy policy
@@ -43,8 +44,10 @@ Umami is self-hosted, cookieless, and the only tracker on the site. There is no
 template engine here, so that line is repeated in each file; `tests/site.test.mjs`
 fails the build if any page carries a different src or id, a second copy, or a
 second analytics vendor. CTAs are tagged with `data-umami-event`:
-`install-extension`, `view-checker`, `view-fix-service`, `request-fix`,
-`submit-fix-request`, `submit-waitlist`, `submit-uninstall-feedback`.
+`install-extension`, `view-checker`, `view-fix-service`, `view-web-check`, `run-web-check`,
+`request-fix`, `submit-fix-request`, `submit-waitlist`, `submit-uninstall-feedback`. On the
+online check, each per-check "Have me …" button also carries `data-umami-event-check` with the
+check id (`summary` on the "get all of this fixed" button).
 
 `by.html` is the flowpro.by landing and is deliberately left out, so its traffic
 does not land in the flowpro.dev property.
@@ -55,13 +58,23 @@ All wired to real endpoints:
 
 | Form | Endpoint | Fallback |
 |---|---|---|
+| Online check (`/ai-visibility/check/`) | `POST https://api.flowpro.dev/v1/site/check` | an error message and "Try again" |
 | Fix request (`/ai-visibility/fix/`, `/pl/…`) | `POST https://api.flowpro.dev/v1/site/audit-request` | prefilled `mailto:ivan@flowpro.dev` shown on any network error or non-2xx |
-| Live-check waitlist (checker pages, install page) | `POST https://api.flowpro.dev/v1/site/waitlist` | same |
-| Uninstall feedback (`/ai-visibility/goodbye/`) | `POST https://api.flowpro.dev/v1/site/feedback` | same |
+| Live-check and monitoring waitlist (checker pages, install page, online check) | `POST https://api.flowpro.dev/v1/site/waitlist` | same |
+| Uninstall feedback (`/ai-visibility/goodbye/`) | `POST https://api.flowpro.dev/v1/site/feedback` (not built yet, so this always falls back) | same |
 
-Each form posts JSON, carries `src`, `ref`, `lang` and `page` (plus `score` on the
-fix page, read from `?src=&score=&ref=` in the extension's deep link), and hides a
-`company` honeypot field that silently drops bot submissions.
+Each form posts JSON, carries `src`, `ref`, `lang` and `page`, and hides a `company`
+honeypot field that silently drops bot submissions. The fix page reads `?src=&score=&ref=`
+into hidden fields and prefills the address from `?url=` and the message from `?note=`
+(both still editable). It sends `stack` from the API's enum (`unknown` for "Not sure"),
+`message`, `score` as an integer, and leaves out empty fields. The API's contract test
+(`aeo-checker/apps/api/src/app.test.ts`) posts the same payloads.
+
+The online check renders the API's report and nothing else: no check or scoring logic, and
+report text (which comes from the audited site) is written with `textContent` only. Every
+failing or weak check gets its own "Have me …" button into the fix form; the labels live in
+`CTA_LABELS` in the page, and `tests/ai-visibility.test.mjs` fails if a check in
+`@aeo/core` has no label.
 
 ## Open Graph images
 
@@ -76,7 +89,7 @@ for the legacy page, and is not regenerated.
 ```
 node tests/site.test.mjs          # every page against the checker's own rules
 node tests/aeo.test.mjs           # robots.txt, sitemap.xml, llms.txt, nginx, home pages
-node tests/ai-visibility.test.mjs # extension pages, fix service, privacy policies
+node tests/ai-visibility.test.mjs # extension pages, online check, fix service, privacy policies
 ```
 
 All three run in CI before the deploy step.

@@ -93,6 +93,7 @@ for (const url of [
   "https://flowpro.dev/pl/",
   "https://flowpro.dev/ai-visibility/",
   "https://flowpro.dev/pl/ai-visibility/",
+  "https://flowpro.dev/ai-visibility/check/",
   "https://flowpro.dev/ai-visibility/fix/",
   "https://flowpro.dev/pl/ai-visibility/fix/",
   "https://flowpro.dev/about/",
@@ -109,6 +110,7 @@ assert.ok(llms.startsWith("# FlowPro\n"), "llms.txt must be plain Markdown-like 
 assert.doesNotMatch(llms, /<!doctype html|<html/i, "llms.txt must not be an HTML page");
 assert.match(llms, /AI Visibility Checker/, "llms.txt must describe the current offer");
 assert.match(llms, /https:\/\/flowpro\.dev\/ai-visibility\/fix\//, "llms.txt must list the fix service");
+assert.match(llms, /https:\/\/flowpro\.dev\/ai-visibility\/check\//, "llms.txt must list the online check");
 assert.doesNotMatch(llms, /4 000 PLN/, "llms.txt must not advertise the retired starter price");
 
 // ─── robots.txt ─────────────────────────────────────────────────────────────
