@@ -120,11 +120,12 @@ for (const [name, html, range] of [
 // Every form posts JSON to the API, carries the campaign context, hides a
 // honeypot, and degrades to a prefilled mailto: when the API is unreachable.
 const forms = [
-  ["fix (EN)", fix, "https://api.flowpro.dev/v1/site/audit-request", ["url", "email", "platform", "notes", "src", "score", "ref", "lang", "page"]],
-  ["fix (PL)", fixPl, "https://api.flowpro.dev/v1/site/audit-request", ["url", "email", "platform", "notes", "src", "score", "ref", "lang", "page"]],
+  ["fix (EN)", fix, "https://api.flowpro.dev/v1/site/audit-request", ["url", "email", "stack", "message", "src", "score", "ref", "lang", "page"]],
+  ["fix (PL)", fixPl, "https://api.flowpro.dev/v1/site/audit-request", ["url", "email", "stack", "message", "src", "score", "ref", "lang", "page"]],
   ["checker (EN)", checker, "https://api.flowpro.dev/v1/site/waitlist", ["email", "src", "ref", "lang", "page"]],
   ["checker (PL)", checkerPl, "https://api.flowpro.dev/v1/site/waitlist", ["email", "src", "ref", "lang", "page"]],
   ["welcome", welcome, "https://api.flowpro.dev/v1/site/waitlist", ["email", "src", "ref", "lang", "page"]],
+  // /v1/site/feedback does not exist yet, so this form always falls back to mailto:.
   ["goodbye", goodbye, "https://api.flowpro.dev/v1/site/feedback", ["reason", "detail", "src", "lang", "page"]],
 ];
 for (const [name, html, endpoint, fields] of forms) {
@@ -144,9 +145,22 @@ for (const [name, html, endpoint, fields] of forms) {
   assert.doesNotMatch(html, /<iframe/, `${name}: the iframe transport should be gone`);
 }
 
-// The fix page carries the campaign context from the extension's deep link.
+// The fix page carries the campaign context from deep links (the extension, the online check)
+// and sends exactly what POST /v1/site/audit-request accepts; aeo-checker's
+// apps/api/src/app.test.ts posts the same payloads.
 for (const [name, html] of [["fix (EN)", fix], ["fix (PL)", fixPl]]) {
   assert.match(html, /\["src", "score", "ref"\]\.forEach/, `${name}: must read ?src=&score=&ref= into hidden fields`);
+  assert.match(html, /params\.get\("url"\)\.slice\(0, 200\)/, `${name}: must prefill the address from ?url=`);
+  assert.match(html, /params\.get\("note"\)\.slice\(0, 1000\)/, `${name}: must prefill the message from ?note=, capped at 1000`);
+  const stackValues = [...html.matchAll(/<option value="([^"]*)">/g)].map((match) => match[1]);
+  assert.deepEqual(
+    stackValues,
+    ["unknown", "wordpress", "static", "webflow", "squarespace", "shopify", "custom"],
+    `${name}: stack values must match the API enum`,
+  );
+  assert.doesNotMatch(html, /name="(platform|notes)"/, `${name}: the API rejects platform and notes`);
+  assert.match(html, /data\.score = Number\(score\)/, `${name}: score must be sent as a number`);
+  assert.match(html, /if \(data\[key\] === ""\) delete data\[key\]/, `${name}: empty optional fields must be left out`);
 }
 
 // ─── Privacy policies ───────────────────────────────────────────────────────
