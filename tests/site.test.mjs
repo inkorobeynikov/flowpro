@@ -40,6 +40,7 @@ const expectedPages = [
   "index.html",
   join("about", "index.html"),
   join("ai-visibility", "index.html"),
+  join("ai-visibility", "check", "index.html"),
   join("ai-visibility", "fix", "index.html"),
   join("ai-visibility", "privacy", "index.html"),
   join("automatyzacja", "index.html"),

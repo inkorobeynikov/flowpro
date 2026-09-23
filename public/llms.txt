@@ -14,6 +14,9 @@
 - Score 0–100 with four verdicts: Hard for AI to read (0–39), Partly readable by AI
   (40–69), Readable by AI (70–89), Ready to be cited (90–100).
 - Landing page: https://flowpro.dev/ai-visibility/
+- Online check: the same 17 checks for any public URL, run on the server against the
+  HTML the site sends before JavaScript runs, the way most AI crawlers read it. Free,
+  no account. https://flowpro.dev/ai-visibility/check/
 
 ## Free audit
 
@@ -50,6 +53,7 @@
 - Home (PL): https://flowpro.dev/pl/
 - AI Visibility Checker (EN): https://flowpro.dev/ai-visibility/
 - AI Visibility Checker (PL): https://flowpro.dev/pl/ai-visibility/
+- Online check (EN): https://flowpro.dev/ai-visibility/check/
 - AI Readiness Fix (EN): https://flowpro.dev/ai-visibility/fix/
 - AI Readiness Fix (PL): https://flowpro.dev/pl/ai-visibility/fix/
 - About: https://flowpro.dev/about/
