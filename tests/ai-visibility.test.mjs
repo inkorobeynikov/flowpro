@@ -297,7 +297,7 @@ assert.match(
   /Ivan Karabeinikau Digital Engineering, a sole proprietorship registered in the Polish business register \(CEIDG\), operating as FlowPro, ul\. Bokserska 63, 02-690 Warszawa, Poland\. NIP: 9512646879\./,
   "extension privacy page must keep the complete operator details",
 );
-assert.match(privacy, /href="mailto:ivan@flowpro\.dev">ivan@flowpro\.dev<\/a>/);
+assert.match(privacy, /href="mailto:in\.korobeynikov@gmail\.com">in\.korobeynikov@gmail\.com<\/a>/);
 assert.doesNotMatch(
   privacy,
   /\[(?:STREET AND NUMBER|POSTCODE|Operator|Contact)\]/i,
