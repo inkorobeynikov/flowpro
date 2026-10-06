@@ -317,7 +317,7 @@
           </div>
           <p class="form-note" id="form-error" role="alert" hidden>
             The form could not be sent. Send the same note by email instead:
-            <a id="form-error-mailto" href="mailto:ivan@flowpro.dev">ivan@flowpro.dev</a>.
+            <a id="form-error-mailto" href="mailto:in.korobeynikov@gmail.com">in.korobeynikov@gmail.com</a>.
           </p>
         </article>
       </div>
@@ -371,7 +371,7 @@
             })
             .catch(function () {
               button.disabled = false;
-              mailtoLink.href = "mailto:ivan@flowpro.dev?subject=" +
+              mailtoLink.href = "mailto:in.korobeynikov@gmail.com?subject=" +
                 encodeURIComponent("AI Visibility Checker feedback") +
                 "&body=" + encodeURIComponent(data.reason + String.fromCharCode(10, 10) + data.detail);
               failure.hidden = false;

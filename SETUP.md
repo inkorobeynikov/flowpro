@@ -75,7 +75,7 @@ certbot certonly \
   -w /srv/infrastructure/nginx/webroot \
   -d flowpro.dev \
   -d www.flowpro.dev \
-  --email ivan@flowpro.dev \
+  --email in.korobeynikov@gmail.com \
   --agree-tos \
   --non-interactive
 ```

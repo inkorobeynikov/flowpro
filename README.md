@@ -59,7 +59,7 @@ All wired to real endpoints:
 | Form | Endpoint | Fallback |
 |---|---|---|
 | Online check (`/ai-visibility/check/`) | `POST https://api.flowpro.dev/v1/site/check` | an error message and "Try again" |
-| Fix request (`/ai-visibility/fix/`, `/pl/…`) | `POST https://api.flowpro.dev/v1/site/audit-request` | prefilled `mailto:ivan@flowpro.dev` shown on any network error or non-2xx |
+| Fix request (`/ai-visibility/fix/`, `/pl/…`) | `POST https://api.flowpro.dev/v1/site/audit-request` | prefilled `mailto:in.korobeynikov@gmail.com` shown on any network error or non-2xx |
 | Live-check and monitoring waitlist (checker pages, install page, online check) | `POST https://api.flowpro.dev/v1/site/waitlist` | same |
 | Uninstall feedback (`/ai-visibility/goodbye/`) | `POST https://api.flowpro.dev/v1/site/feedback` (not built yet, so this always falls back) | same |
 

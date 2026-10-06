@@ -63,7 +63,7 @@ while `api.flowpro.dev` was unreachable:
 - the request failed, the error note appeared, and the form stayed on screen so the
   person can retry rather than losing what they typed
 - the fallback link came out as
-  `mailto:ivan@flowpro.dev?subject=AI Readiness Fix request — https://example.com&body=Website: …`
+  `mailto:in.korobeynikov@gmail.com?subject=AI Readiness Fix request — https://example.com&body=Website: …`
 - the `company` honeypot is clipped to 1×1 and does not shift the layout
 
 The same code path serves the waitlist and uninstall forms.
